@@ -152,7 +152,7 @@ footer:
 
 
 # Reading Files
-include:
+include_cache:
   - .htaccess
   - _pages
 exclude:
