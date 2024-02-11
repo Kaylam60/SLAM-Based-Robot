@@ -2,6 +2,7 @@ Welcome to my Fast Robots page! This is a work in progress
 
 # Lab 1: Introduction to Artemis 
 ## Part 1
+## Prelab
 ### "Example 1: Blink it Up"
 ### "Example 4: Analog Read"
 ### "Example 2: Serial"
