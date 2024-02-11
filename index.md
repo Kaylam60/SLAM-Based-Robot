@@ -26,7 +26,7 @@ An ECHO command was to be implemented to test the connection between the compute
 ![cmd types][]
 
 *Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
-![cmd types](https://github.com/Kaylam60/Fast-Robots/lab1/cmd.png)
+![cmd types](https://github.com/Kaylam60/Fast-Robots/cmd.png)
 
 ###  "GET_TIME_MILLIS" Command
 This implementation involved receiving the current time from the Artemis board. This involved using the millis() function to get the current time in milliseconds and then convert it to an int. The result was presented as a string. The implementation is shown below.
@@ -43,6 +43,7 @@ This command was used to get each time reading for 50 seconds. Similar to the GE
 ![alt text][logo]
 ![alt text][logo]
 ### "GET_TEMP_READINGS"
+This command involved extracting many temperature readings in the span of a few seconds. For this code, I created another array to hold the temperature reading and then appended each value in the array to its corresponding time value. The data was then sent as strings by a for loop to the Python code. This reduced the need to have another command  to send the data just like in the SEDN_TIME_DATA command
 ![alt text][logo]
 
 ### A Limitation
