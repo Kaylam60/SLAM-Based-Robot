@@ -23,11 +23,11 @@ Next was to find and change the necessary MAC address and UUIDs for our individu
 
 ![mac address](assets/lab1/mac.png)
 ![uuid](assets/lab1/uuid.png)
-![arduino connections](assets/lab1/connections_ard)
+![arduino connections](assets/lab1/connections_ard.png)
 ![connections](assets/lab1/connections.png)
 ### "ECHO" Command
 An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.
-![cmd types](assets/lab1/)
+![echo](assets/lab1/echo.png)
 
 *Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
 
