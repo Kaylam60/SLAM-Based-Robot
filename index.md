@@ -23,10 +23,10 @@ Next was to find and change the necessary MAC address and UUIDs for our individu
 ![alt text][logo]
 ### "ECHO" Command
 An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.
-![cmd types](https://github.com/Kaylam60/Fast-Robots/lab 1 images/cmd.png)
+![cmd types][]
 
 *Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
-![alt text][lab 1 images/cmd.png]
+![alt text](https://github.com/Kaylam60/Fast-Robots/tree/d76e0fa361ddd882c08878b838b8b2f61d2b6e3d/lab%201%20images)
 
 ###  "GET_TIME_MILLIS" Command
 This implementation involved receiving the current time from the Artemis board. This involved using the millis() function to get the current time in milliseconds and then convert it to an int. The result was presented as a string. The implementation is shown below.
