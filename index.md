@@ -16,23 +16,35 @@ The microphone output example was used to show the frequencies picked up by the 
 ## Part 2: Bluetooth Setup
 The objective of this part of the lab was to establish a Bluetooth connection between the Artemis board and the computer and to indicate its functionality. In this section, we worked in tandem with both Arduino and Python (using Jupiter lab) to connect the Artemis through Bluetooth, then send data to the board over Bluetooth as well
 ### Prelab
+We were tasked with installing the virtual environment that was to be used during the rest of the labs and installing the necessary packages for it. Next was to unzip the codebase to be used during this lab and the later ones also.
+Next was to find and change the necessary MAC address and UUIDs for our individual Artemis boards. The change is to be made in the ble_arduino.ino  file in the ble codebase. Since many boards could share the same MAC address, also using their UUIDs is a recommended step. This change would be replicated in the connection.yaml file shown.
 ![alt text][logo]
 ![alt text][logo]
-![alt text][logo]
-### *The interlining connection*
 ![alt text][logo]
 ### "ECHO" Command
+An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.
 ![alt text][logo]
+
+*Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
 ###  "GET_TIME_MILLIS" Command
+This implementation involved receiving the current time from the Artemis board. This involved using the millis() function to get the current time in milliseconds and then convert it to an int. The result was presented as a string. The implementation is shown below.
 ![alt text][logo]
 ### Notification Handler
+The notification handler is used to automatically receive the data sent by the Artemis board without manually calling the data each time.  For the code, I decided to use an array at each initialization of the code so that all the data would be put in an array, whether it was a single value or an assortment of them. This piece of Python code will be very helpful as we create multiple functions to collect data (including those containing arrays)
 ![alt text][logo]
-### Time array and "SEND_TIME_DATA"
+Whenever the notification handler is being used, it is “told” to collect the data received by calling the start_notify() function as shown below. 
+![alt text][logo]
+This is done only once for the handler to function. To stop the handler from collecting information, we just issue the stop_notify() command on the Python file 
+![alt text][logo]
+### "SEND_TIME_DATA"
+This command was used to get each time reading for 50 seconds. Similar to the GET_TIME_MILLIS command it would get the current time at each iteration of the loop and then put it in a time array to be received by the notification handler. 
 ![alt text][logo]
 ![alt text][logo]
 ### "GET_TEMP_READINGS"
 ![alt text][logo]
 
+### A Limitation
+The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit values at 150 Hz every 50 seconds, we would be able to create 25 values before the storage on the Artemis board would run out. Sending data in groups would thus optimize the speed of data acquisition from the Artemis board.
 
 
 
