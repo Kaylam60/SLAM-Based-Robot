@@ -1,4 +1,4 @@
-Welcome to my Fast Robots page! This is a work in progress
+ Welcome to my Fast Robots page! This is a work in progress
 
 # Lab 1: Introduction to Artemis 
 ## Part 1
