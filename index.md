@@ -11,6 +11,8 @@ The “Blink it Up” example was used for this portion of the lab. The code, wh
 This example  was used to test the temperature sensor on the Artemis board.  The test would send the temperature reading and time to the serial monitor and would slightly change the temperature number as I applied either a touch or breath method. ( Change is tiny, about 0.2, likely due to the surrounding room temperature being warmer than usual)
 ### "Example 2: Serial"
 This example found under Artemis examples, was used to test the serial monitor output. It would print out any messages that were typed in the input space, as seen in the image below.
+
+![ex2_serial](assets/lab1/ex_4serial.png)
 ### "PDM/Example 1: Microphone Output"
 The microphone output example was used to show the frequencies picked up by the Artemis board. There would be a slight change as I released a higher-pitched whistle in time and would decrease as I stopped. Below is an image and video of this:
 ## Part 2: Bluetooth Setup
@@ -18,15 +20,17 @@ The objective of this part of the lab was to establish a Bluetooth connection be
 ### Prelab
 We were tasked with installing the virtual environment that was to be used during the rest of the labs and installing the necessary packages for it. Next was to unzip the codebase to be used during this lab and the later ones also.
 Next was to find and change the necessary MAC address and UUIDs for our individual Artemis boards. The change is to be made in the ble_arduino.ino  file in the ble codebase. Since many boards could share the same MAC address, also using their UUIDs is a recommended step. This change would be replicated in the connection.yaml file shown.
-![alt text][logo]
-![alt text][logo]
-![alt text][logo]
+![alt text](assets/lab1/ble setup.png)
+![alt text](assets/lab1/)
+![alt text](assets/lab1/)
 ### "ECHO" Command
 An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.
-![cmd types][]
+![cmd types](assets/lab1/)
 
 *Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
-![cmd types](https://github.com/Kaylam60/Fast-Robots/assets/cmd.png)
+
+![cmd_arduino](assets/lab1/cmdarduino.png)
+![cmd](assets/lab1/cmd.png)
 
 ###  "GET_TIME_MILLIS" Command
 This implementation involved receiving the current time from the Artemis board. This involved using the millis() function to get the current time in milliseconds and then convert it to an int. The result was presented as a string. The implementation is shown below.
