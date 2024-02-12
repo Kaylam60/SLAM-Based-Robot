@@ -1,26 +1,43 @@
- Welcome to my Fast Robots page! This is a work in progress
+ECE 4160
+
+My name is Kofi Ohene Adu (kao65). This page contains the labs I have completed for this course. I am an electrical and computer engineering student, with an interest in robotics and languages. I like video games, playing the guitar, and pretty much like listening to music in general.
+Welcome to my Fast Robots page! This is a work in progress!
 
 # Lab 1: Introduction to Artemis 
 ## Part 1
 The objective of this part of the lab is to test Artemis board functionality, by testing the LED, Temperature sensor, Serial output, and microphone.
-### Prelab
 
 ### "Example 1: Blink it Up"
 The “Blink it Up” example was used for this portion of the lab. The code, when compiled would turn the LED on for a specified amount of time, then would turn it off. Below is the result:
+
 [![blink test](http://img.youtube.com/vi/sf7wSSynCig/0.jpg)](https://www.youtube.com/watch?v=sf7wSSynCig)
+
+*Note: Will take you to the video itself*
 
 ### "Example 4: Serial"
 This example found under Artemis examples, was used to test the serial monitor output. It would print out any messages that were typed in the input space, as seen in the image below.
 
 ![ex4_serial](assets/lab1/ex_4serial.png)
 
+*Serial test Image*
+
 ### "Example 2: Analog Read"
-This example  was used to test the temperature sensor on the Artemis board.  The test would send the temperature reading and time to the serial monitor and would slightly change the temperature number as I applied either a touch or breath method. ( Change is tiny, about 0.2, likely due to the surrounding room temperature being warmer than usual)
+This example  was used to test the temperature sensor on the Artemis board.  The test would send the temperature reading and time to the serial monitor and would slightly change the temperature number as I applied warm air. ( Change is tiny, about 0.2 from 33.7 to 33.9, likely due to the surrounding room temperature being warmer than usual). Below is the result
+
+[![temp test](http://img.youtube.com/vi/-SnpcKFRFgw/0.jpg)](https://www.youtube.com/shorts/-SnpcKFRFgw)
+
+*Note: Will take you to the video itself*
 
 ### "PDM/Example 1: Microphone Output"
 The microphone output example was used to show the frequencies picked up by the Artemis board. There would be a slight change as I released a higher-pitched whistle in time and would decrease as I stopped. Below is an image and video of this:
 
 ![mic](assets/lab1/ex_1micout.png)
+
+*Mic test Image*
+
+[![mic test](http://img.youtube.com/vi/9HuIhQY1Gsg/0.jpg)](https://www.youtube.com/shorts/9HuIhQY1Gsg)
+
+*Note: Will take you to the video itself*
 
 ## Part 2: Bluetooth Setup
 The objective of this part of the lab was to establish a Bluetooth connection between the Artemis board and the computer and to indicate its functionality. In this section, we worked in tandem with both Arduino and Python (using Jupiter lab) to connect the Artemis through Bluetooth, then send data to the board over Bluetooth as well
@@ -30,19 +47,32 @@ We were tasked with installing the virtual environment that was to be used durin
 Next was to find and change the necessary MAC address and UUIDs for our individual Artemis boards. The change is to be made in the ble_arduino.ino  file in the ble codebase. Since many boards could share the same MAC address, also using their UUIDs is a recommended step. This change would be replicated in the connection.yaml file shown.
 
 ![mac address](assets/lab1/mac.png)
+
+*Mac Address*
+
 ![uuid](assets/lab1/uuid.png)
+
+*UUID*
+
 ![arduino connections](assets/lab1/connections_ard.png)
 ![connections](assets/lab1/connections.png)
+
+*Connections in both Arduino and Python files*
 
 ### The Connect
 
 ![bleconnect](assets/lab1/connect.png)
+*How ble connection is done*
 
 ### "ECHO" Command
 An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.
 
 ![echo](assets/lab1/echo.png)
+*Echo Implementation*
+
 ![echoresult](assets/lab1/echoresult.png)
+
+*Echo results*
 
 *Note:* Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.
 
@@ -79,7 +109,7 @@ This command involved extracting many temperature readings in the span of a few 
 ![temp_readings_py](assets/lab1/temppy.png)
 
 ### A Limitation
-The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit values at 150 Hz every 50 seconds, we would be able to create 25 values before the storage on the Artemis board would run out. Sending data in groups would thus optimize the speed of data acquisition from the Artemis board.
+The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit values at an average frequency every 50 seconds, we would be able to create about less than 30 values before the storage on the Artemis board would run out. Sending data in groups would thus optimize the speed of data acquisition from the Artemis board.
 
 
 
