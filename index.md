@@ -7,7 +7,7 @@ The objective of this part of the lab is to test Artemis board functionality, by
 
 ### "Example 1: Blink it Up"
 The “Blink it Up” example was used for this portion of the lab. The code, when compiled would turn the LED on for a specified amount of time, then would turn it off. Below is the result:
-[![blink test]](https://www.youtube.com/watch?v=sf7wSSynCig)
+[![blink test](http://img.youtube.com/vi/sf7wSSynCig/0.jpg)](https://www.youtube.com/watch?v=sf7wSSynCig)
 
 ### "Example 4: Serial"
 This example found under Artemis examples, was used to test the serial monitor output. It would print out any messages that were typed in the input space, as seen in the image below.
