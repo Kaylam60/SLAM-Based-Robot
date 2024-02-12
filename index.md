@@ -113,6 +113,14 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 
+# Lab 2
+### Setup the IMU
+### Accelerometer
+### Gyroscope 
+### Sample Data
+### Stunt
+
+
 
 
 
