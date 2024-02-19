@@ -115,10 +115,10 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 # Lab 2: In Progress
-The goal of this lab was to set up the integration between the Artemis board and the imu in order to gather the relative angular orientation data (pitch, roll, and yaw) of the robot. Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.
+The goal of this lab was to set up the integration between the Artemis board and the imu to gather the robot's relative angular orientation data (pitch, roll, and yaw). Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.
 
 ### Setup the IMU
-First we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.
+First, we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.
 
 <img src="assets/lab2/imu.png" width="250" height="250">
 Next up is running The Example1_BAsics code under the ICM 20948 library to test that our imu is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:
@@ -150,9 +150,15 @@ and we achieved a cleaner plot due to this implementation.
 ![constraint](assets/lab2/constraint.png)
 
 ### Gyroscope 
-Next up was to implement the gyroscope. Unlike the accelerometer, teh gyroscope find the angular velocity. 
+Next up was to implement the gyroscope. Unlike the accelerometer, the gyroscope measures the rate of angular change. Using the gyroscope is another way of getting the needed orientation data, without the risk of noise. The roll, pitch, and yaw can be calculated as in the code snippet below, where *dt* is the sampling frequency. 
+
 ![gyro](assets/lab2/gyro.png)
+
+There is an underlying issue though. Due to how the gyroscope pitch, roll, and yaw are all calculated, there can be a drift from the actual data readings over time. Hence even with the constraint implementation I created earlier, there are some large outliers present in the plotted data.
+
 ![gyro_raw](assets/lab2/gyro_raw.png)
+
+To fix this issue, we were tasked with the implementation of a complimentary filter that would take both our pitch and roll values from both the gyroscope and the accelerometer to give more accurate data readings
 ![cf](assets/lab2/cf.png)
 
 ### Sample Data
