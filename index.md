@@ -113,7 +113,7 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 
-# Lab 2
+# Lab 2: In Progess
 ### Setup the IMU
 <img src="assets/lab2/imu.png" width="250" height="250">
 
