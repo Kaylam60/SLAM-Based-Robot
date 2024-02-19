@@ -115,10 +115,27 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 # Lab 2
 ### Setup the IMU
+<img src="assets/lab2/imu.png" width="250" height="250">
+
 *Note:* The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasnt changed to 0 in my case
+![AD0_VAL](assets/lab2/ad_val.png)
+
 ### Accelerometer
+![accel](assets/lab2/accel.png)
+![accel_plot](assets/lab2/accel_raw.png)
+![lpf](assets/lab2/lpf.png)
+![lpf_plot](assets/lab2/lpf_plot.png)
+
+*Note:*
+![constraint](assets/lab2/constraint.png)
+
 ### Gyroscope 
+![gyro](assets/lab2/gyro.png)
+![gyro_raw](assets/lab2/gyro_raw.png)
+![cf](assets/lab2/cf.png)
+
 ### Sample Data
+
 ### Stunt
 
 
