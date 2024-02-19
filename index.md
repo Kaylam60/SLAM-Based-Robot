@@ -115,22 +115,42 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 # Lab 2: In Progress
-### Setup the IMU
-<img src="assets/lab2/imu.png" width="250" height="250">
+The goal of this lab was to set up the integration between the Artemis board and the imu in order to gather the relative angular orientation data (pitch, roll, and yaw) of the robot. Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.
 
-*Note:* The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasnt changed to 0 in my case
+### Setup the IMU
+First we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.
+
+<img src="assets/lab2/imu.png" width="250" height="250">
+Next up is running The Example1_BAsics code under the ICM 20948 library to test that our imu is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:
+
+[![IMU_test](http://img.youtube.com/vi//0.jpg)()
+
+*Note:* The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.
+
 ![AD0_VAL](assets/lab2/ad_val.png)
 
 ### Accelerometer
+The accelerometer is the component of the IMU that is used to find linear acceleration, however, there is a method by which we can calculate the pitch and roll of the robot, using atan2 as shown below:
+
 ![accel](assets/lab2/accel.png)
+Where both are found by using their unneeded axes(X and Z for pitch, Y and Z for Roll).
+
+Below is the graph achieved from rotating the IMU between -90 and 90 along the edge of my table
+
 ![accel_plot](assets/lab2/accel_raw.png)
+As you can see, our plot seems to have  a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below
+
 ![lpf](assets/lab2/lpf.png)
+
+and we achieved a cleaner plot due to this implementation.
 ![lpf_plot](assets/lab2/lpf_plot.png)
 
-*Note:*
+*Note:* To make sure the angles for my pitch and roll were between -90 and 90, I made a constraining angle implementation. I used this at any point we needed our angles in this specific range.
+
 ![constraint](assets/lab2/constraint.png)
 
 ### Gyroscope 
+Next up was to implement the gyroscope. Unlike the accelerometer, teh gyroscope find the angular velocity. 
 ![gyro](assets/lab2/gyro.png)
 ![gyro_raw](assets/lab2/gyro_raw.png)
 ![cf](assets/lab2/cf.png)
@@ -138,6 +158,7 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 ### Sample Data
 
 ### Stunt
+[![Stunt](http://img.youtube.com/vi//0.jpg)()
 
 
 
