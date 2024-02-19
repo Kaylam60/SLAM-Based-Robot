@@ -162,6 +162,7 @@ To fix this issue, we were tasked with the implementation of a complimentary fil
 ![cf](assets/lab2/cf.png)
 
 ### Sample Data
+I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.
 
 ### Stunt
 [![Stunt](http://img.youtube.com/vi//0.jpg)()
