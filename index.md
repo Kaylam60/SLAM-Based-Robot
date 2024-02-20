@@ -123,7 +123,7 @@ First, we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakou
 <img src="assets/lab2/imu.png" width="250" height="250">
 Next up is running The Example1_BAsics code under the ICM 20948 library to test that our imu is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:
 
-[![IMU_test](http://img.youtube.com/vi//0.jpg)()
+[![IMU_test](http://img.youtube.com/vi/XSVtera0Tec/0.jpg)(https://www.youtube.com/watch?v=XSVtera0Tec)
 
 *Note:* The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.
 
@@ -165,7 +165,7 @@ To fix this issue, we were tasked with the implementation of a complimentary fil
 I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.
 
 ### Stunt
-[![Stunt](http://img.youtube.com/vi//0.jpg)()
+[![Stunt](http://img.youtube.com/vi/SvHxav7Waao/0.jpg)(https://www.youtube.com/shorts/SvHxav7Waao)
 
 
 
