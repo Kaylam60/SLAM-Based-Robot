@@ -114,16 +114,16 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 
-# Lab 2: In Progress
+# Lab 2: IMU ( Still in Progress)
 The goal of this lab was to set up the integration between the Artemis board and the imu to gather the robot's relative angular orientation data (pitch, roll, and yaw). Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.
 
 ### Setup the IMU
 First, we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.
 
 <img src="assets/lab2/imu.png" width="250" height="250">
-Next up is running The Example1_BAsics code under the ICM 20948 library to test that our imu is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:
+Next up is running The Example1_BAsics code under the ICM 20948 library to test that our IMU is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:
 
-[![IMU_test](http://img.youtube.com/vi/XSVtera0Tec/0.jpg)(https://www.youtube.com/watch?v=XSVtera0Tec)
+[![IMU_test](http://img.youtube.com/vi/XSVtera0Tec/0.jpg)](https://www.youtube.com/watch?v=XSVtera0Tec)
 
 *Note:* The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.
 
@@ -138,11 +138,13 @@ Where both are found by using their unneeded axes(X and Z for pitch, Y and Z for
 Below is the graph achieved from rotating the IMU between -90 and 90 along the edge of my table
 
 ![accel_plot](assets/lab2/accel_raw.png)
+
 As you can see, our plot seems to have  a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below
 
 ![lpf](assets/lab2/lpf.png)
 
 and we achieved a cleaner plot due to this implementation.
+
 ![lpf_plot](assets/lab2/lpf_plot.png)
 
 *Note:* To make sure the angles for my pitch and roll were between -90 and 90, I made a constraining angle implementation. I used this at any point we needed our angles in this specific range.
@@ -159,13 +161,14 @@ There is an underlying issue though. Due to how the gyroscope pitch, roll, and y
 ![gyro_raw](assets/lab2/gyro_raw.png)
 
 To fix this issue, we were tasked with the implementation of a complimentary filter that would take both our pitch and roll values from both the gyroscope and the accelerometer to give more accurate data readings
+
 ![cf](assets/lab2/cf.png)
 
 ### Sample Data
 I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.
 
 ### Stunt
-[![Stunt](http://img.youtube.com/vi/SvHxav7Waao/0.jpg)(https://www.youtube.com/shorts/SvHxav7Waao)
+[![Stunt](http://img.youtube.com/vi/SvHxav7Waao/0.jpg)](https://www.youtube.com/shorts/SvHxav7Waao)
 
 
 
