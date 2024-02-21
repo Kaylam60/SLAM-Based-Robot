@@ -209,8 +209,11 @@ Now we can test their functionality. As seen in the image below, one sensor has 
 
 I did make an observation. The sensors, especially when both connected would print out distances at a much slower rate, When printed with time, I found my distances would be sent out with around a 5s delay. This shows that the limiting factor was the time taken for the TOF sensor to gather data.
 
-### Bluetooth functionality
-NExt up was to transfer our code to the BLE arduino file so that we could call our TOF sensors to record data and send it over Bluetooth. 
+### Bluetooth functionality.
+Next up was to transfer our code to the BLE Arduino file so that we could call our TOF sensors to record data and send it over Bluetooth. I did this by putting the need code to find the distance in a new case block, and making sure the needed setup code was running as well.
+
+![ble_tof](assets/lab3/ble_tof.png)
+![tof_setup](assets/lab3/tof_setup.png)
 
  
 
