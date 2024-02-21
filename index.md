@@ -173,6 +173,7 @@ I decided to decrease the number of iterations of my loops to increase data acqu
 
 
 # Lab 3
+The objective of this lab was to setup time of flight sensors(TOF) that we would use for calculating distance on our robot.
 ### Prelab
 ###  The VL53L1X Sensor
 ### Time of flight modes
