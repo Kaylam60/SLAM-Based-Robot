@@ -139,7 +139,7 @@ Below is the graph achieved from rotating the IMU between -90 and 90 along the e
 
 ![accel_plot](assets/lab2/accel_raw.png)
 
-As you can see, our plot seems to have  a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below
+As you can see, our plot has a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below
 
 ![fourier](assets/lab2/fourier.png)
 
@@ -149,7 +149,7 @@ and we achieved a cleaner plot due to this implementation.
 
 ![lpf_plot](assets/lab2/lpf_plot.png)
 
-*Note:* To make sure the angles for my pitch and roll were between -90 and 90, I made a constraining angle implementation. I used this at any point we needed our angles in this specific range.
+*Note:* To ensure the angles for my pitch and roll were between -90 and 90, I implemented a constraining angle. I used this when we needed our angles in this specific range.
 
 ![constraint](assets/lab2/constraint.png)
 
@@ -181,14 +181,38 @@ The objective of this lab was to set up the time of flight sensors(TOF) that we 
 ###  The VL53L1X Sensor
 <img src="assets/lab3/tof.jpg" width="250" height="250">
 
-![wiring](assets/lab3/wiring.png)
+For the schematic of my robot, I decided to put the TOF sensors on the ends of the robot since that would be the main direction of motion and would be more reliable for collecting collision distance data compared to the sides. This would also decrease the angle of rotations it would need to take to map the data in a 360 view around it.
 
-I hooked up one TOF sensor to my Artemis and then ran the Example05_Wire_I2C 
+<img src="assets/lab3/wiring.png" width="250" height="250">
+
+I hooked up one TOF sensor to my Artemis and then ran the Example05_Wire_I2C to find its I2C address. 
+
 ![i2c](assets/lab3/i2c.png)
 
+By default, both sensors were set to 0x29 (or 0x52, which is just the same bits right shifted). When both are hooked up, addresses 0x1 to 0x7e were all detected, so it took some time singling out the necessary addresses needed for our implementation
+
 ### Time of flight modes
+The sensors we were dealing with have two modes currently available: Short(1.3m) and Long(4m), which is the default. For our purposes, I decided to use the short mode, due to our need to map out obstacles in closer proximity to the robot and dodge them during its run. The way to set this mode for both sensors would be to use the **.setDistanceModeShort()** command
+
+![short graph](assets/lab3/graph.png)
+
+
 ### Multiple TOF sensors
-![both_functionality](assets/lab3/both_functionalit.png)
+As I mentioned earlier, both our TOF sensors defaulted to the same address, so if you set them to measure distances, you would observe that the data values would be highly inaccurate. To fix this, we change the address of one of the TOFs, by turning the second one off( with the use of a shutdown_pin), changing the first's address, and then turning the second back on. Now our TOF sensors have different addresses!
+
+![tof code](assets/lab3/tof_sensors.png)
+
+Now we can test their functionality. As seen in the image below, one sensor has drastically different distance readings than the other.
+![both_functionality](assets/lab3/both_functionality.png)
+
+ Sensor 1 has an Obstacle in closer proximity to it hence the lesser values
+
+I did make an observation. The sensors, especially when both connected would print out distances at a much slower rate, When printed with time, I found my distances would be sent out with around a 5s delay. This shows that the limiting factor was the time taken for the TOF sensor to gather data.
+
+### Bluetooth functionality
+NExt up was to transfer our code to the BLE arduino file so that we could call our TOF sensors to record data and send it over Bluetooth. 
+
+ 
 
 
 
