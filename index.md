@@ -141,6 +141,8 @@ Below is the graph achieved from rotating the IMU between -90 and 90 along the e
 
 As you can see, our plot seems to have  a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below
 
+![fourier](assets/lab2/fourier.png)
+
 ![lpf](assets/lab2/lpf.png)
 
 and we achieved a cleaner plot due to this implementation.
@@ -164,6 +166,8 @@ To fix this issue, we were tasked with the implementation of a complimentary fil
 
 ![cf](assets/lab2/cf.png)
 
+![filter_plot](assets/lab2/filter_plot.png)
+
 ### Sample Data
 I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.
 
@@ -173,10 +177,18 @@ I decided to decrease the number of iterations of my loops to increase data acqu
 
 
 # Lab 3
-The objective of this lab was to setup time of flight sensors(TOF) that we would use for calculating distance on our robot.
-### Prelab
+The objective of this lab was to set up the time of flight sensors(TOF) that we would use for calculating distance on our robot. This would be very important to make sure the robot can execute stunts effectively whilst dodging obstacles.
 ###  The VL53L1X Sensor
+<img src="assets/lab3/tof.jpg" width="250" height="250">
+
+![wiring](assets/lab3/wiring.png)
+
+I hooked up one TOF sensor to my Artemis and then ran the Example05_Wire_I2C 
+![i2c](assets/lab3/i2c.png)
+
 ### Time of flight modes
+### Multiple TOF sensors
+![both_functionality](assets/lab3/both_functionalit.png)
 
 
 
