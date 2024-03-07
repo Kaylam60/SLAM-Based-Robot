@@ -218,6 +218,9 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
  
 # Lab 4: Motors and Open Loop Control ( in progress)
 ## Prelab
+
+To set up the motor drivers to  be able to pick up the PWM signals we send from the Artemis, we need to ensure that the pins we use to connect them allowed such signals to be transmitted in the first place. Using the documentation for the Redboard Nano to locate the pins that allowed PWM signals, I decided to use pins 6, 7 , 11, and 12 for my motors.
+
 ### Setup
 
 <img src="assets/lab4/setup.jpg" width="350" height="250">
