@@ -219,23 +219,26 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 # Lab 4: Motors and Open Loop Control ( in progress)
 ## Prelab
 
+![plan_schematic](assets/lab4/plan.png) (not included yet)
+
+I decided to keep the connector we initially had for our RC car and then connect that to the Vin and GND pins ons the motor drivers. This allowed us to connect the 3.7V battery to the motors and remove it for things like charging. This is mainly because the battery needed for the motors was different to the one needed for the Artemis.
+
 To set up the motor drivers to  be able to pick up the PWM signals we send from the Artemis, we need to ensure that the pins we use to connect them allowed such signals to be transmitted in the first place. Using the documentation for the Redboard Nano to locate the pins that allowed PWM signals, I decided to use pins 6, 7 , 11, and 12 for my motors.
 
 ### Setup
+For this lab to open up the RC car and take out the motherboard and lied connections in the chasis, then replace them with our motor driver connections. For all the test we needed we would use an oscilliscope, a power supply,  our RC car with the artemis connected and the method by which we upload our code( a laptop in  my case. The image below shows the general setup I used: 
 
 <img src="assets/lab4/setup.jpg" width="350" height="250">
 
 ### analogWrite
-The analogWrite function was what would enable us to send PWM signals to the motor driver for the selctive wheels to rotate either clockwise or anticlockwise. The first parameter of the function would highlight which pin on the artemis the driver is connected to. And since each pin had its selctive direction, we could also use these to indicate the direction of the car. Lets say clockwise is forward and anticloclkwise is backwards in my implemntation. Forward pins are pin 6 and pin 11. Backward pins are pin 7 and pin 12. Using the code below:
+The analogWrite function was what would enable us to send PWM signals to the motor driver for the selctive wheels to rotate either clockwise or anticlockwise. The first parameter of the function would highlight which pin on the Artemis the driver is connected to. And since each pin had its selctive direction, we could also use these to indicate the direction of the car. Lets say clockwise is forward and anticloclkwise is backwards in my implemntation. Forward pins are pin 6 and pin 11. Backward pins are pin 7 and pin 12. Using the code below:
 
 ![analogWrite](assets/lab4/analogWrite.png)
 
-dependent on what motorPin1 was set to, the pair of wheels on either side would rotate. If motorPin1 was equal to 7 then the wheels on the left side of the RC car would move  it "backwards"
-
- 
+dependent on what motorPin1 was set to, the pair of wheels on either side would rotate. If motorPin1 was equal to 7 then the wheels on the left side of the RC car would move  it "backwards".
 
 ### Oscilloscope
-
+To test that the PWM signals being generated properly, we used the oscillope to visualize it. I used a DC power supply of about 3.73V and 0.004A to simulate the signals we would get when the oscilattor clip was connected to the output of the motor driver. Using
 <img src="assets/lab4/osc_read.jpg" width="350" height="200">
 
 ### Wheels
