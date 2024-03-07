@@ -216,7 +216,7 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 ![tof_setup](assets/lab3/tof_setup.png)
 
  
-# Lab 4: Motors and Open Loop Control
+# Lab 4: Motors and Open Loop Control ( in progress)
 ## Prelab
 ### Setup
 
