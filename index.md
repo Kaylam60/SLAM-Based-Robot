@@ -114,7 +114,7 @@ The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit v
 
 
 
-# Lab 2: IMU ( Still in Progress)
+# Lab 2: IMU 
 The goal of this lab was to set up the integration between the Artemis board and the imu to gather the robot's relative angular orientation data (pitch, roll, and yaw). Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.
 
 ### Setup the IMU
@@ -176,7 +176,7 @@ I decided to decrease the number of iterations of my loops to increase data acqu
 
 
 
-# Lab 3
+# Lab 3 : TOF
 The objective of this lab was to set up the time of flight sensors(TOF) that we would use for calculating distance on our robot. This would be very important to make sure the robot can execute stunts effectively whilst dodging obstacles.
 ###  The VL53L1X Sensor
 <img src="assets/lab3/tof.jpg" width="250" height="250">
@@ -216,6 +216,14 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 ![tof_setup](assets/lab3/tof_setup.png)
 
  
+# Lab 4: Motors and Open Loop Control
+## Prelab
+### Setup
+### analogWrite
+### Oscilloscope
+### Wheels
+### Final Product
+### PWM and Calibration
 
 
 
