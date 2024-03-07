@@ -223,29 +223,34 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 <img src="assets/lab4/setup.jpg" width="350" height="250">
 
 ### analogWrite
+The analogWrite function was what would enable us to send PWM signals to the motor driver for the selctive wheels to rotate either clockwise or anticlockwise. The first parameter of the function would highlight which pin on the artemis the driver is connected to. And since each pin had its selctive direction, we could also use these to indicate the direction of the car. Lets say clockwise is forward and anticloclkwise is backwards in my implemntation. Forward pins are pin 6 and pin 11. Backward pins are pin 7 and pin 12. Using the code below:
 
 ![analogWrite](assets/lab4/analogWrite.png)
 
+dependent on what motorPin1 was set to, the pair of wheels on either side would rotate. If motorPin1 was equal to 7 then the wheels on the left side of the RC car would move  it "backwards"
+
+ 
+
 ### Oscilloscope
 
-<img src="assets/lab4/osc_read.jpg" width="350" height="250">
+<img src="assets/lab4/osc_read.jpg" width="350" height="200">
 
 ### Wheels
 
-<img src="assets/lab4/1_motor.jpg" width="350" height="250">
+<img src="assets/lab4/1_motor.jpg" width="350" height="500">
 
 [![Motor_working](http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg)](https://youtube.com/shorts/v5g4AhH0_x4)
 
 ### Final Product
 
-<img src="assets/lab4/schematic_look.jpg" width="350" height="250">
-
-<img src="assets/lab4/final product.jpg" width="350" height="250">
-
-[![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
+<img src="assets/lab4/schematic_look.jpg" width="350" height="400">
+<img src="assets/lab4/final product.jpg" width="350" height="400">
 
 ### PWM and Calibration
+The lowest value my analogWrite function would take for the wheels to generate motion was around 40 - 50. 60 seems to be the threshold for which the wheels would rotate at a quick pace and would sync up after a small delay
 
+So to account for this slight delay, i decided to 
+[![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
 
 
 
