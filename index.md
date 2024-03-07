@@ -219,10 +219,31 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 # Lab 4: Motors and Open Loop Control
 ## Prelab
 ### Setup
+
+<img src="assets/lab4/setup.jpg" width="350" height="250">
+
 ### analogWrite
+
+![analogWrite](assets/lab4/analogWrite.png)
+
 ### Oscilloscope
+
+<img src="assets/lab4/osc_read.jpg" width="350" height="250">
+
 ### Wheels
+
+<img src="assets/lab4/1_motor.jpg" width="350" height="250">
+
+[![Motor_working](http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg)](https://youtube.com/shorts/v5g4AhH0_x4)
+
 ### Final Product
+
+<img src="assets/lab4/schematic_look.jpg" width="350" height="250">
+
+<img src="assets/lab4/final product.jpg" width="350" height="250">
+
+[![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
+
 ### PWM and Calibration
 
 
