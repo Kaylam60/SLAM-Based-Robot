@@ -218,8 +218,9 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
  
 # Lab 4: Motors and Open Loop Control ( in progress)
 ## Prelab
+Below is the configuration I planned to follow for my RC car
 
-![plan_schematic](assets/lab4/plan.png) (not included yet)
+<img src="assets/lab4/Plan.jpg" width="350" height="350">
 
 I decided to keep the connector we initially had for our RC car and then connect that to the Vin and GND pins on the motor drivers. This allowed us to connect the 3.7V battery to the motors and remove it for things like charging. This is mainly because the battery needed for the motors was different from the one needed for the Artemis.
 
@@ -242,6 +243,8 @@ To test that the PWM signals were being generated properly, we used the oscillos
 
 <img src="assets/lab4/1_motor.jpg" width="350" height="500">
 
+*One Motor Connected*
+
 Using the Arduino example analogWrite, I enabled pin 7 and then saw as the oscilloscope picked up the waveform.
 
 <img src="assets/lab4/osc_read.jpg" width="350" height="200">
@@ -252,19 +255,31 @@ Below is a video of the selected pin motors rotating.
 
 [![Motor_working](http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg)](https://youtube.com/shorts/v5g4AhH0_x4)
 
+*Note: Will take you to the video itself*
+
 ### Final Product
  Once I had ensured that both motor drivers worked correctly, minimized the wiring exposure to mitigate the problem of the wires snagging on the wheels when they rotated. The top image shows the motors soldered to their respective wiring. The bottom image shows 
  
 <img src="assets/lab4/schematic_look.jpg" width="350" height="400">
+
+*Motors Visible*
+
 <img src="assets/lab4/final product.jpg" width="350" height="400">
+
+*Motors not visible*
 
 ### PWM and Calibration
 The lowest value my analogWrite function would take for the wheels to generate motion was around 40 - 50. 60 seems to be the threshold for which the wheels would rotate at a quick pace and sync up after a small delay
 
-So to account for this slight delay, I decided to
+So to account for this slight delay, I decided to start the wheels that had a delay first, then start the second set of wheels after about 2 seconds ( which seemed to be the average delay between the two)
 
-Below is a video showing the RC car moving in a straight line for about 10-11 tiles. Each tile represents about 1-foot-by-1-foot, so we can assume that the RC car traveled a distance of at least 10 feet before going off-axis.
+Below is a video showing the RC car moving in a straight line for about 10-11 tiles. Each tile represents about 1-foot-by-1-foot, so we can assume that the RC car traveled a distance of at least 10 feet before going off-axis. 
+
 [![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
+
+*Note: Will take you to the video itself*
+
+There still need to be further tweaks if I want the RC car to continuously run in a straight line.
 
 
 
