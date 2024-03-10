@@ -216,36 +216,55 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 ![tof_setup](assets/lab3/tof_setup.png)
 
  
-# Lab 4: Motors and Open Loop Control
+# Lab 4: Motors and Open Loop Control ( in progress)
 ## Prelab
+
+![plan_schematic](assets/lab4/plan.png) (not included yet)
+
+I decided to keep the connector we initially had for our RC car and then connect that to the Vin and GND pins on the motor drivers. This allowed us to connect the 3.7V battery to the motors and remove it for things like charging. This is mainly because the battery needed for the motors was different from the one needed for the Artemis.
+
+To set up the motor drivers to  be able to pick up the PWM signals we send from the Artemis, we need to ensure that the pins we use to connect them allow such signals to be transmitted in the first place. Using the documentation for the Redboard Nano to locate the pins that allowed PWM signals, I decided to use pins 6, 7, 11, and 12 for my motors.
+
 ### Setup
+For this lab, we opened up the RC car, took out the motherboard and left connections in the chassis, and then replaced them with our motor driver connections. For all the tests we needed we would use an oscilloscope, a power supply,  our RC car with the Artemis connected, and the method by which we upload our code( a laptop in  my case. The image below shows the general setup I used: 
 
 <img src="assets/lab4/setup.jpg" width="350" height="250">
 
 ### analogWrite
+The analogWrite function was what would enable us to send PWM signals to the motor driver for the selective wheels to rotate either clockwise or anticlockwise. The first parameter of the function would highlight which pin on the Artemis the driver is connected to. And since each pin had its selective direction, we could also use these to indicate the direction of the car. Let's say clockwise is forward and anticlockwise is backward in my implementation. Forward pins are pin 6 and pin 11. Backward pins are pin 7 and pin 12. Using the code below:
 
 ![analogWrite](assets/lab4/analogWrite.png)
 
-### Oscilloscope
+dependent on what motorPin1 was set to, the pair of wheels on either side would rotate. If motorPin1 was equal to 7 then the wheels on the left side of the RC car would move  it "backwards".
 
-<img src="assets/lab4/osc_read.jpg" width="350" height="250">
+### Oscilloscope Test
+To test that the PWM signals were being generated properly, we used the oscilloscope to visualize it. I used a DC power supply of about 3.73V and 0.004A to simulate the signals we would get when the oscillator clip was connected to the output of the motor driver.
 
-### Wheels
+<img src="assets/lab4/1_motor.jpg" width="350" height="500">
 
-<img src="assets/lab4/1_motor.jpg" width="350" height="250">
+Using the Arduino example analogWrite, I enabled pin 7 and then saw as the oscilloscope picked up the waveform.
+
+<img src="assets/lab4/osc_read.jpg" width="350" height="200">
+
+*Waveform of PWM signal*
+
+Below is a video of the selected pin motors rotating.
 
 [![Motor_working](http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg)](https://youtube.com/shorts/v5g4AhH0_x4)
 
 ### Final Product
-
-<img src="assets/lab4/schematic_look.jpg" width="350" height="250">
-
-<img src="assets/lab4/final product.jpg" width="350" height="250">
-
-[![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
+ Once I had ensured that both motor drivers worked correctly, minimized the wiring exposure to mitigate the problem of the wires snagging on the wheels when they rotated. The top image shows the motors soldered to their respective wiring. The bottom image shows 
+ 
+<img src="assets/lab4/schematic_look.jpg" width="350" height="400">
+<img src="assets/lab4/final product.jpg" width="350" height="400">
 
 ### PWM and Calibration
+The lowest value my analogWrite function would take for the wheels to generate motion was around 40 - 50. 60 seems to be the threshold for which the wheels would rotate at a quick pace and sync up after a small delay
 
+So to account for this slight delay, I decided to
+
+Below is a video showing the RC car moving in a straight line for about 10-11 tiles. Each tile represents about 1-foot-by-1-foot, so we can assume that the RC car traveled a distance of at least 10 feet before going off-axis.
+[![Run](http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg)](https://youtube.com/shorts/EIBG5ZQepQ0)
 
 
 
