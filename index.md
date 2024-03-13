@@ -217,7 +217,7 @@ Next up was to transfer our code to the BLE Arduino file so that we could call o
 
  
 # Lab 4: Motors and Open Loop Control ( in progress)
-## Prelab
+### Prelab
 Below is the configuration I planned to follow for my RC car
 
 <img src="assets/lab4/Plan.jpg" width="350" height="350">
@@ -283,8 +283,16 @@ There still need to be further tweaks if I want the RC car to continuously run i
 
 
 
+# Lab 5: PID Control: Linear PID control and Linear interpolation
+### Objective
 
+### Prelab
+### PID Implementation
 
+### Test Runs and Data Extracted
+
+[![Trial](http://img.youtube.com/vi/hOUHRzUujSo/0.jpg)](https://youtube.com/shorts/hOUHRzUujSo
+)
 
 
 
