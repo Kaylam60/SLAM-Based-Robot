@@ -330,6 +330,7 @@ For my tests, I decided to first start with finding the appropriate Kp value. Th
 ![0.15](assets/lab5/trial_2.png)
 
 ![0.1](assets/lab5/trial3.png) 
+
 *Note: Car stops at about 340mm*
 
 
@@ -337,25 +338,31 @@ For my tests, I decided to first start with finding the appropriate Kp value. Th
 
 
 [![Best Kp](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/7DNZ9yC7FX4)
+
 *Trial run 3. Kp=0.12*
 
 ![Best Kp](assets/lab5/best_Kp.png)
+
 *Note: Car stops at about 295-315 mm(fluctuates with each run)*
 
 Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:
 
 [![Trial](http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg)](https://youtube.com/shorts/DqiHZIKDnOU)
+
 *Trial run 4. Ki=0.0.0004*
 
 ![0.0004](assets/lab5/trial_2ki.png) 
 
 [![Trial](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/qJ9iUuuDL8w)
+
 *Trial run 5. Ki=0.0003*
 
 ![0.0003](assets/lab5/2nd_best.png) 
+
 *Note: Car stops at 294mm*
 
 [![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
 *Trial run 6. Ki=-0.0002*
 
 ![0.0002](assets/lab5/best.png)
