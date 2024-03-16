@@ -317,7 +317,7 @@ To test my implementation, I created a new case statement that would call PID() 
 
 This command would be called by Python and would run the trials and give us the data we need to analyze.
 
-For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.01 to 0.1 and below is a video of a run when Kp=0.09 and its associated graph, as well as graphs of Kp=0.05, and 0.1.
+For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.01 to 0.1 and below is a video of a run when Kp=0.09 and its associated graph, as well as graphs of Kp=0.05, and 0.1. All these trials start around 1110-1200mm
 
 [![Trial](http://img.youtube.com/vi/hOUHRzUujSo/0.jpg)](https://youtube.com/shorts/hOUHRzUujSo
 )
@@ -326,8 +326,9 @@ For my tests, I decided to first start with finding the appropriate Kp value. Th
 
 ![0.05](assets/lab5/0.05.png)
 
-![0.1](assets/lab5/0.1.png)
-
+![0.1](assets/lab5/0.1.png) stops at about 340mm
+![0.12](assets/lab5/0.12.png) stops around 295mm-315mm so far least error
+Ki 0.0002 
 
 
 
