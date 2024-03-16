@@ -285,14 +285,51 @@ There still need to be further tweaks if I want the RC car to continuously run i
 
 # Lab 5: PID Control: Linear PID control and Linear interpolation
 ### Objective
-
+The objective of this lab was to implement a PID controller that would be used to allow the car to avoid obstacles. The implementation of this we used was to stop the car at a set distance of 200mm from a wall autonomously.
 ### Prelab
+For this lab, we had to implement a handler that would store all the data we would need to analyze for our PID controller. We would run a function that would initiate the PID controller and then store that data in arrays. We would later plot these values and make conclusions of suitable values for the parameters needed in our PID controller.
+
+![Data](assets/lab5/debug_data.png)
+
 ### PID Implementation
+My plan was to use a full PID implementation for my controller. The formula below gives a rough idea of how it would be calculated with e being the error(target- actual distance)
+
+![formula](assets/lab5/formula.png)
+
+I used this formula to construct my PID.
+I made a new function PID() that would take a target distance as an input. I gave this function a parameter in case we ever wanted to change our target distance. 
+I initialized the timer count and first tested to see how much time would pass to gain each calculation of the PID later implemented in the function and found that the range was mostly between 0.01 and 0.02 ms. So I decided to hardcode the change in time to a constant value of 0.01 since it was the most frequent dt value( this was mostly done to avoid a nan error when calculating the PID whenever dt was calculated to be 0).
+I would then initiate the TOF sensor to start recording distances, only when there was data present and then save it in the variable 'distance'. This would be the actual distance between the wall and the front of the RC car where I place my TOF sensor.
+The error was just the difference between the actual distance and the target distance and the signs were accounted for and would be further used in the PID calculation. 
+I decided to split the PID calculation into three parts to make it easier to test each part: The proportional aspect(P), the Integral(I), and the derivative(D). I implemented each part to their respective implementations in the formula shown earlier.
+
+![pid](assets/lab5/pid.png)
+
+Next was to make the statements that would execute the necessary behaviors in the car concerning the PID values. If positive( meaning that the car is further away than the target distance), then move forward at a certain amount of speed( and forward was linked to certain pins so we initialized those pins). If negative, the car moves backward instead( so we initialized the backward pins instead). I realized I would encounter movement errors if the car didn't stop before the pins were switched so, I incorporated that into my if statement too.
+I also accounted for if the PID was set to 0. This would mean that the error would be 0 and hence the car should come to a stop at that distance.
+
+![pid_ifs](assets/lab5/pid_if.png)
 
 ### Test Runs and Data Extracted
+To test my implementation, I created a new case statement that would call PID() for a set number of seconds ( where val is our timer in a sense).
+
+![Trial](assets/lab5/run.png)
+
+This command would be called by Python and would run the trials and give us the data we need to analyze.
+
+For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.01 to 0.1 and below is a video of a run when Kp=0.09 and its associated graph, as well as graphs of Kp=0.05, and 0.1.
 
 [![Trial](http://img.youtube.com/vi/hOUHRzUujSo/0.jpg)](https://youtube.com/shorts/hOUHRzUujSo
 )
+
+![0.09](assets/lab5/0.09.png)
+
+![0.05](assets/lab5/0.05.png)
+
+![0.1](assets/lab5/0.1.png)
+
+
+
 
 
 
