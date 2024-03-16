@@ -315,19 +315,32 @@ To test my implementation, I created a new case statement that would call PID() 
 
 This command would be called by Python and would run the trials and give us the data we need to analyze.
 
-For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.01 to 0.1 and below is a video of a run when Kp=0.09 and its associated graph, as well as graphs of Kp=0.05, and 0.1. All these trials start around 1110-1200mm
+For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, and 0.12. All these trials start around 1110-1200mm
 
-[![Trial](http://img.youtube.com/vi/hOUHRzUujSo/0.jpg)](https://youtube.com/shorts/hOUHRzUujSo
-)
+[![Trial 1](http://img.youtube.com/vi/em1e_gkeJNE/0.jpg)](https://youtube.com/shorts/em1e_gkeJNE)
 
-![0.09](assets/lab5/0.09.png)
+![0.3](assets/lab5/trial1.png)
 
-![0.05](assets/lab5/0.05.png)
+[![Trial 2](http://img.youtube.com/vi/6Mn24eUHIJc/0.jpg)](https://youtube.com/shorts/6Mn24eUHIJc)
 
-![0.1](assets/lab5/0.1.png) stops at about 340mm
-![0.12](assets/lab5/0.12.png) stops around 295mm-315mm so far least error
-Ki 0.0002 
+![0.15](assets/lab5/trial_2.png)
 
+![0.1](assets/lab5/trial3.png) stops at about 340mm
+
+![0.11](assets/lab5/trial_4.png)
+
+[![Best Kp](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/7DNZ9yC7FX4)
+
+![Best Kp](assets/lab5/best_Kp.png)
+
+[![Trial](http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg)](https://youtube.com/shorts/DqiHZIKDnOU)
+
+![0.0004](assets/lab5/trial_2ki.png) stops around 295mm-315mm so far 
+[![Trial](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/qJ9iUuuDL8w)
+![0.0003](assets/lab5/2nd_best.png)stops around 295mm-315mm so far 
+
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+![0.0002](assets/lab5/best.png) stops around 307mm
 
 
 
