@@ -309,38 +309,60 @@ I implemented if statements that would execute the necessary behaviors in the ca
 I also accounted for if the PID was set to 0. This would mean that the error would be 0 and hence the car should come to a stop at that distance. I also accounted for if the speed was past the limit whether positive or negative and set them to an upper limit of 255
 
 ### Test Runs and Data Extracted
-To test my implementation, I created a new case statement that would call PID() for a set number of seconds ( where val is our timer in a sense).
+To test my implementation, I created a new case statement that would call PID() (with a target distance of 300mm) for a set number of seconds ( where val is our timer in a sense).
 
 ![Run](assets/lab5/run.png)
 
 This command would be called by Python and would run the trials and give us the data we need to analyze.
 
-For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, and 0.12. All these trials start around 1110-1200mm
+For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, 0.1, 0.11, and 0.12. All these trials were tested within 1110-1200mm from the wall( or pillow in the video case)
 
 [![Trial 1](http://img.youtube.com/vi/em1e_gkeJNE/0.jpg)](https://youtube.com/shorts/em1e_gkeJNE)
+
+*Trial run 1. Kp=0.3*
 
 ![0.3](assets/lab5/trial1.png)
 
 [![Trial 2](http://img.youtube.com/vi/6Mn24eUHIJc/0.jpg)](https://youtube.com/shorts/6Mn24eUHIJc)
 
+*Trial run 2. Kp=0.15*
+
 ![0.15](assets/lab5/trial_2.png)
 
-![0.1](assets/lab5/trial3.png) stops at about 340mm
+![0.1](assets/lab5/trial3.png) 
+*Note: Car stops at about 340mm*
+
 
 ![0.11](assets/lab5/trial_4.png)
 
+
 [![Best Kp](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/7DNZ9yC7FX4)
+*Trial run 3. Kp=0.12*
 
 ![Best Kp](assets/lab5/best_Kp.png)
+*Note: Car stops at about 295-315 mm(fluctuates with each run)*
+
+Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:
 
 [![Trial](http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg)](https://youtube.com/shorts/DqiHZIKDnOU)
+*Trial run 4. Ki=0.0.0004*
 
-![0.0004](assets/lab5/trial_2ki.png) stops around 295mm-315mm so far 
+![0.0004](assets/lab5/trial_2ki.png) 
+
 [![Trial](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/qJ9iUuuDL8w)
-![0.0003](assets/lab5/2nd_best.png)stops around 295mm-315mm so far 
+*Trial run 5. Ki=0.0003*
+
+![0.0003](assets/lab5/2nd_best.png) 
+*Note: Car stops at 294mm*
 
 [![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
-![0.0002](assets/lab5/best.png) stops around 307mm
+*Trial run 6. Ki=-0.0002*
+
+![0.0002](assets/lab5/best.png)
+
+*Note: Car stops around 304-307mm)
+
+I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and i could decide to incorporate the D aspect of the PID to resolve this minor issue
 
 
 
