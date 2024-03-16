@@ -315,6 +315,7 @@ To test my implementation, I created a new case statement that would call PID() 
 
 This command would be called by Python and would run the trials and give us the data we need to analyze.
 
+#### P controller
 For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, 0.1, 0.11, and 0.12. All these trials were tested within 1110-1200mm from the wall( or pillow in the video case)
 
 [![Trial 1](http://img.youtube.com/vi/em1e_gkeJNE/0.jpg)](https://youtube.com/shorts/em1e_gkeJNE)
@@ -345,6 +346,7 @@ For my tests, I decided to first start with finding the appropriate Kp value. Th
 
 *Note: Car stops at about 295-315 mm(fluctuates with each run)*
 
+#### PI controller
 Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:
 
 [![Trial](http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg)](https://youtube.com/shorts/DqiHZIKDnOU)
