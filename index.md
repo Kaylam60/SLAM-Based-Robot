@@ -286,10 +286,15 @@ There still need to be further tweaks if I want the RC car to continuously run i
 # Lab 5: PID Control: Linear PID control and Linear interpolation
 ### Objective
 The objective of this lab was to implement a PID controller that would be used to allow the car to avoid obstacles. The implementation of this we used was to stop the car at a set distance of 200mm from a wall autonomously.
+
+***
+
 ### Prelab
 For this lab, we had to implement a handler that would store all the data we would need to analyze for our PID controller. We would run a function that would initiate the PID controller and then store that data in arrays. We would later plot these values and make conclusions of suitable values for the parameters needed in our PID controller.
 
 ![Data](assets/lab5/debug_data.png)
+
+***
 
 ### PI Implementation
 I planned to use a full PID implementation for my controller, but the best results I achieved were with the PI controller. The formula below gives a rough idea of how it would be calculated with e being the error(target- actual distance)
@@ -308,26 +313,85 @@ I decided to split the PID calculation into three parts to make it easier to tes
 I implemented if statements that would execute the necessary behaviors in the car concerning the PID values. If positive( meaning that the car is further away than the target distance), then move forward at a decreasing amount of speed=PID( and forward was linked to certain pins so we initialized those pins). If negative, the car moves backward instead( so we initialized the backward pins instead) at a speed=-PID(since PID values would be negative if there is an overshoot). I realized I would encounter movement errors if the car didn't stop before the pins were switched so, I incorporated that into my if statement too.
 I also accounted for if the PID was set to 0. This would mean that the error would be 0 and hence the car should come to a stop at that distance. I also accounted for if the speed was past the limit whether positive or negative and set them to an upper limit of 255
 
+***
+
 ### Test Runs and Data Extracted
-To test my implementation, I created a new case statement that would call PID() for a set number of seconds ( where val is our timer in a sense).
+To test my implementation, I created a new case statement that would call PID() (with a target distance of 300mm) for a set number of seconds ( where val is our timer in a sense).
 
 ![Run](assets/lab5/run.png)
 
 This command would be called by Python and would run the trials and give us the data we need to analyze.
 
-For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.01 to 0.1 and below is a video of a run when Kp=0.09 and its associated graph, as well as graphs of Kp=0.05, and 0.1. All these trials start around 1110-1200mm
+***
 
-[![Trial](http://img.youtube.com/vi/hOUHRzUujSo/0.jpg)](https://youtube.com/shorts/hOUHRzUujSo
-)
+#### P controller
+For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, 0.1, 0.11, and 0.12. All these trials were tested within 1110-1200mm from the wall( or pillow in the video case)
 
-![0.09](assets/lab5/0.09.png)
+[![Trial 1](http://img.youtube.com/vi/em1e_gkeJNE/0.jpg)](https://youtube.com/shorts/em1e_gkeJNE)
 
-![0.05](assets/lab5/0.05.png)
+*Trial run 1. Kp=0.3*
 
-![0.1](assets/lab5/0.1.png) stops at about 340mm
-![0.12](assets/lab5/0.12.png) stops around 295mm-315mm so far least error
-Ki 0.0002 
+![0.3](assets/lab5/trial1.png)
 
+***
+
+[![Trial 2](http://img.youtube.com/vi/6Mn24eUHIJc/0.jpg)](https://youtube.com/shorts/6Mn24eUHIJc)
+
+*Trial run 2. Kp=0.15*
+
+![0.15](assets/lab5/trial_2.png)
+
+***
+
+![0.1](assets/lab5/trial3.png) 
+
+*Note: Car stops at about 340mm*
+
+***
+
+![0.11](assets/lab5/trial_4.png)
+
+***
+
+[![Best Kp](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/7DNZ9yC7FX4)
+
+*Trial run 3. Kp=0.12*
+
+![Best Kp](assets/lab5/best_Kp.png)
+
+*Note: Car stops at about 295-315 mm(fluctuates with each run)*
+
+***
+
+#### PI controller
+Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:
+
+[![Trial](http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg)](https://youtube.com/shorts/DqiHZIKDnOU)
+
+*Trial run 4. Ki=0.0.0004*
+
+![0.0004](assets/lab5/trial_2ki.png) 
+
+***
+[![Trial](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/qJ9iUuuDL8w)
+
+*Trial run 5. Ki=0.0003*
+
+![0.0003](assets/lab5/2nd_best.png) 
+
+*Note: Car stops at 294mm*
+
+***
+
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
+*Trial run 6. Ki=-0.0002*
+
+![0.0002](assets/lab5/best.png)
+
+*Note: Car stops around 304-307mm)
+
+I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue
 
 
 
