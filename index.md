@@ -399,6 +399,25 @@ The objective of this lab is to implement a PID controller that corrects the ori
 
 ### P implementation
 
+![code](assets/lab6/code.png)
+
+![kvalues](assets/lab6/k_values.png)
+
+![fix](assets/lab6/error_fixing.png)
+
+# P controller
+
+![kp6](assets/lab6/kp6.png)
+
+![kp7](assets/lab6/kp7.png)
+
+![kp8](assets/lab6/kp8.png)
+
+![kp10](assets/lab6/kp102.png)
+
+![kp103](assets/lab6/kp103.png)
+
+![kp20](assets/lab6/kp20.png)
 
 
 
