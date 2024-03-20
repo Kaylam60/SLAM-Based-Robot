@@ -413,7 +413,9 @@ The objective of this lab is to implement a PID controller that corrects the ori
 
 ![kp8](assets/lab6/kp8.png)
 
-![kp10](assets/lab6/kp102.png)
+![kp10](assets/lab6/kp10.png)
+
+![kp102](assets/lab6/kp102.png)
 
 ![kp103](assets/lab6/kp103.png)
 
