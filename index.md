@@ -391,7 +391,14 @@ Since my car was very close to stopping at a good distance relative to the targe
 
 *Note: Car stops around 304-307mm)
 
-I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue
+I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue.
+
+# Lab 6
+### Objective
+The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift.
+
+### P implementation
+
 
 
 
