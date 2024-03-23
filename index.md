@@ -393,12 +393,12 @@ Since my car was very close to stopping at a good distance relative to the targe
 
 I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue.
 
-# Lab 6
+# Lab 6: Orientation PID control ( Not completed yet)
 ### Objective
 The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift.
 
 ### P implementation
-
+Similar to the linear PID controller, 
 
 ![code](assets/lab6/code.png)
 
@@ -425,37 +425,37 @@ The objective of this lab is to implement a PID controller that corrects the ori
 
 *Trial run 2. Kp=7*
 
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+[![Trial](http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg)](https://youtube.com/shorts/mLE2kY2lPKg)
 
 ![kp8](assets/lab6/kp8.png)
 
 *Trial run 3. Kp=8*
 
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+[![Trial](http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg)](https://youtube.com/shorts/ysdbTV0sTpQ)
 
 ![kp10](assets/lab6/kp10.png)
 
-*Trial run 3. Kp=10*
+*Trial run 4. Kp=10*
 
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+[![Trial](http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg)](https://youtube.com/shorts/Oab9UVZsDJ4)
 
 ![kp102](assets/lab6/kp102.png)
 
-*Trial run 3, Take 2. Kp=10 *
+*Trial run 5, Take 2. Kp=10 *
 
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+[![Trial](http://img.youtube.com/vi/U_CNB69brVA/0.jpg)](https://youtube.com/shorts/U_CNB69brVA)
 
 ![kp103](assets/lab6/kp103.png)
 
-*Trial run 3, Take 3 . Kp=10 *
+*Trial run 6, Take 3 . Kp=10 *
 
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+[![Trial](http://img.youtube.com/vi/zehcrj7XeiY/0.jpg)](https://youtube.com/shorts/zehcrj7XeiY)
 
 ![kp20](assets/lab6/kp20.png)
 
-*Trial run 4. Kp=20*
+*Trial run 7. Kp=20*
 
-I ran multiple trials to find the optimal Kp value that would give me almost consistent results with each run. First i decided to increment Kp by 1 from Kp=5 and test the results. Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate. I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin hence i decided to test around Kp =10 since it gave me the best results thus far. You will see however that on random runs with kp=10, there were times where the controller deviated heavily from the desired point.
+I ran multiple trials to find the optimal Kp value that would give me almost consistent results with each run. First I decided to increment Kp by 1 from Kp=5 and test the results. Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate. I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin hence i decided to test around Kp =10 since it gave me the best results thus far. You will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point.
 
 
 
