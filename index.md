@@ -413,35 +413,49 @@ The objective of this lab is to implement a PID controller that corrects the ori
 * Dt error fix *  
 
 # P controller
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
 
 ![kp6](assets/lab6/kp6.png)
 
 *Trial run 1. Kp=6*
+
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
 ![kp7](assets/lab6/kp7.png)
 
 *Trial run 2. Kp=7*
+
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
 
 ![kp8](assets/lab6/kp8.png)
 
 *Trial run 3. Kp=8*
 
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
 ![kp10](assets/lab6/kp10.png)
 
 *Trial run 3. Kp=10*
 
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
 ![kp102](assets/lab6/kp102.png)
 
-*Trial run 3, Take 2 . Kp=10 *
+*Trial run 3, Take 2. Kp=10 *
+
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
 
 ![kp103](assets/lab6/kp103.png)
 
 *Trial run 3, Take 3 . Kp=10 *
 
+[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+
 ![kp20](assets/lab6/kp20.png)
 
 *Trial run 4. Kp=20*
 
-I ran multiple trials to find the optimal Kp value that would give me almost consistent results with each run. First i decided to increment Kp by 1 from Kp=5 and test the results. Once I reached Kp=10 as a value, I had seen that my controller had followed the desired angles at a decent rate. I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin hence i decided to test around Kp =10 since it gave me the best results thus far. You will see however than on random runs with kp=10, there were times where the controller deviated heavily from the desired point.
+I ran multiple trials to find the optimal Kp value that would give me almost consistent results with each run. First i decided to increment Kp by 1 from Kp=5 and test the results. Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate. I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin hence i decided to test around Kp =10 since it gave me the best results thus far. You will see however that on random runs with kp=10, there were times where the controller deviated heavily from the desired point.
 
 
 
