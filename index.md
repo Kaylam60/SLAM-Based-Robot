@@ -424,12 +424,12 @@ I first tested with multiples of 5 and then would center around a margin if one 
 Below are my trials for different KP values
 For the trial with a KP value of 5, small changes in orientation would make the robot try to compete against them, but with a slight overshoot over time. I also observed that when done from a different direction, the controller in a sense"shuts off" and didn't do anything about the orientation change.
 
-[![Trial1](http://img.youtube.com/vi/FhUqBIZqNwc)/0.jpg)](https://youtube.com/shorts/FhUqBIZqNwc)
+[![Trial1](http://img.youtube.com/vi/FhUqBIZqNwc/0.jpg)](https://youtube.com/shorts/FhUqBIZqNwc)
 *Trial run 1. Kp=5*
 
 Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate.
 
-[![Trial](http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg)](https://youtube.com/shorts/ysdbTV0sTpQ)
+[![Trial2](http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg)](https://youtube.com/shorts/ysdbTV0sTpQ)
 
 ![kp10](assets/lab6/kp10.png)
 
@@ -437,7 +437,7 @@ Once I reached Kp=10 as a value, I observed that my controller had followed the 
 
 I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin. 
 
-[![Trial](http://img.youtube.com/vi/zehcrj7XeiY/0.jpg)](https://youtube.com/shorts/zehcrj7XeiY)
+[![Trial3](http://img.youtube.com/vi/zehcrj7XeiY/0.jpg)](https://youtube.com/shorts/zehcrj7XeiY)
 
 ![kp20](assets/lab6/kp20.png)
 
@@ -445,19 +445,19 @@ I decided to test at a Kp value of 20 to see if my controller would improve or d
 
 I decided to get back to the values between 5 and 10 since I had achieved decent results around them. These are the trials of Kp = 6. Kp=7 and Kp=8.
 
-[![Trial](http://img.youtube.com/vi/lvhvP0U0Vkc/0.jpg)](https://youtube.com/shorts/lvhvP0U0Vkc)
+[![Trial4](http://img.youtube.com/vi/lvhvP0U0Vkc/0.jpg)](https://youtube.com/shorts/lvhvP0U0Vkc)
 
 ![kp6](assets/lab6/kp6.png)
 
 *Trial run 4. Kp=6*
 
-[![Trial](http://img.youtube.com/vi/nshoTFgx5Is/0.jpg)](https://youtube.com/shorts/nshoTFgx5Is)
+[![Trial5](http://img.youtube.com/vi/nshoTFgx5Is/0.jpg)](https://youtube.com/shorts/nshoTFgx5Is)
 
 ![kp7](assets/lab6/kp7.png)
 
 *Trial run 5. Kp=7*
 
-[![Trial](http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg)](https://youtube.com/shorts/mLE2kY2lPKg)
+[![Trial6](http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg)](https://youtube.com/shorts/mLE2kY2lPKg)
 
 ![kp8](assets/lab6/kp8.png)
 
@@ -465,13 +465,13 @@ I decided to get back to the values between 5 and 10 since I had achieved decent
 
 I had concluded that a Kp of 10 would have been my best estimate, but you will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point as shown below:
 
-[![Trial](http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg)](https://youtube.com/shorts/Oab9UVZsDJ4)
+[![Trial7](http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg)](https://youtube.com/shorts/Oab9UVZsDJ4)
 
 ![kp102](assets/lab6/kp102.png)
 
 *Trial run 7, Take 2. Kp=10 *
 
-[![Trial](http://img.youtube.com/vi/U_CNB69brVA/0.jpg)](https://youtube.com/shorts/U_CNB69brVA)
+[![Trial8](http://img.youtube.com/vi/U_CNB69brVA/0.jpg)](https://youtube.com/shorts/U_CNB69brVA)
 
 ![kp103](assets/lab6/kp103.png)
 
