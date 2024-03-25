@@ -393,69 +393,95 @@ Since my car was very close to stopping at a good distance relative to the targe
 
 I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue.
 
+
+
 # Lab 6: Orientation PID control ( Not completed yet)
 ### Objective
-The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift.
+The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift using the IMU.
 
 ### P implementation
-Similar to the linear PID controller, 
+Similar to the implementation of the linear PID controller, my primary objective was to implement a P controller that would control the yaw of the robot in response to a certain error obtained by subtracting the current angle from the desired angle (0 degrees in this case). The controller would then respond by alternating wheel rotations in a certain direction (left or right) to decrease this error to zero. Once the error equates to zero the robot stops moving.
 
 ![code](assets/lab6/code.png)
 
 * Arduino Implementation *
 
+Since I would need a different set of K values for this controller I instantiated a new set of Kp, Ki, and Kd values, and then set them all to 0 as seen below. To test I would change the Kpo variable's value and observe the results.
+
 ![kvalues](assets/lab6/k_values.png)
 
 * K values *
+
+Though not as present, there were some instances where dt would be considerably large on the first instantiation of the robot, so to account for this I put a cap on what dt could be considered. This made sure our Yaw values did not drift to extreme instances.
 
 ![fix](assets/lab6/error_fixing.png)
 
 * Dt error fix *  
 
 # P controller
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
+To implement the controller, I decided to only change the Kpo variable and leave the others at zero.
+I first tested with multiples of 5 and then would center around a margin if one of the Kp values was closer to the desired results.
+Below are my trials for different KP values
+For the trial with a KP value of 5, small changes in orientation would make the robot try to compete against them, but with a slight overshoot over time. I also observed that when done from a different direction, the controller in a sense"shuts off" and didn't do anything about the orientation change.
 
-![kp6](assets/lab6/kp6.png)
+[![Trial1](http://img.youtube.com/vi/FhUqBIZqNwc)/0.jpg)](https://youtube.com/shorts/FhUqBIZqNwc)
+*Trial run 1. Kp=5*
 
-*Trial run 1. Kp=6*
-
-[![Trial](http://img.youtube.com/vi/q6aYRcWZisU/0.jpg)](https://youtube.com/shorts/q6aYRcWZisU)
-
-![kp7](assets/lab6/kp7.png)
-
-*Trial run 2. Kp=7*
-
-[![Trial](http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg)](https://youtube.com/shorts/mLE2kY2lPKg)
-
-![kp8](assets/lab6/kp8.png)
-
-*Trial run 3. Kp=8*
+Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate.
 
 [![Trial](http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg)](https://youtube.com/shorts/ysdbTV0sTpQ)
 
 ![kp10](assets/lab6/kp10.png)
 
-*Trial run 4. Kp=10*
+*Trial run 2. Kp=10*
 
-[![Trial](http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg)](https://youtube.com/shorts/Oab9UVZsDJ4)
-
-![kp102](assets/lab6/kp102.png)
-
-*Trial run 5, Take 2. Kp=10 *
-
-[![Trial](http://img.youtube.com/vi/U_CNB69brVA/0.jpg)](https://youtube.com/shorts/U_CNB69brVA)
-
-![kp103](assets/lab6/kp103.png)
-
-*Trial run 6, Take 3 . Kp=10 *
+I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin. 
 
 [![Trial](http://img.youtube.com/vi/zehcrj7XeiY/0.jpg)](https://youtube.com/shorts/zehcrj7XeiY)
 
 ![kp20](assets/lab6/kp20.png)
 
-*Trial run 7. Kp=20*
+*Trial run 3. Kp=20*
 
-I ran multiple trials to find the optimal Kp value that would give me almost consistent results with each run. First I decided to increment Kp by 1 from Kp=5 and test the results. Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate. I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin hence i decided to test around Kp =10 since it gave me the best results thus far. You will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point.
+I decided to get back to the values between 5 and 10 since I had achieved decent results around them. These are the trials of Kp = 6. Kp=7 and Kp=8.
+
+[![Trial](http://img.youtube.com/vi/lvhvP0U0Vkc/0.jpg)](https://youtube.com/shorts/lvhvP0U0Vkc)
+
+![kp6](assets/lab6/kp6.png)
+
+*Trial run 4. Kp=6*
+
+[![Trial](http://img.youtube.com/vi/nshoTFgx5Is/0.jpg)](https://youtube.com/shorts/nshoTFgx5Is)
+
+![kp7](assets/lab6/kp7.png)
+
+*Trial run 5. Kp=7*
+
+[![Trial](http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg)](https://youtube.com/shorts/mLE2kY2lPKg)
+
+![kp8](assets/lab6/kp8.png)
+
+*Trial run 6 Kp=8*
+
+I had concluded that a Kp of 10 would have been my best estimate, but you will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point as shown below:
+
+[![Trial](http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg)](https://youtube.com/shorts/Oab9UVZsDJ4)
+
+![kp102](assets/lab6/kp102.png)
+
+*Trial run 7, Take 2. Kp=10 *
+
+[![Trial](http://img.youtube.com/vi/U_CNB69brVA/0.jpg)](https://youtube.com/shorts/U_CNB69brVA)
+
+![kp103](assets/lab6/kp103.png)
+
+*Trial run 8, Take 3 . Kp=10 *
+
+However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.
+
+
+
+
 
 
 
