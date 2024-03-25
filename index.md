@@ -425,6 +425,7 @@ Below are my trials for different KP values
 For the trial with a KP value of 5, small changes in orientation would make the robot try to compete against them, but with a slight overshoot over time. I also observed that when done from a different direction, the controller in a sense"shuts off" and didn't do anything about the orientation change.
 
 [![Trial1](http://img.youtube.com/vi/FhUqBIZqNwc/0.jpg)](https://youtube.com/shorts/FhUqBIZqNwc)
+
 *Trial run 1. Kp=5*
 
 Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate.
