@@ -395,7 +395,7 @@ I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to 
 
 
 
-# Lab 6: Orientation PID control ( Not completed yet)
+# Lab 6: Orientation PID control 
 ### Objective
 The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift using the IMU.
 
@@ -481,8 +481,11 @@ I had concluded that a Kp of 10 would have been my best estimate, but you will s
 However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.
 
 
-
-
+# Lab 7: Kalman Filter (Not completed yet)
+### Objective
+### Kalman Filter
+### Testing the Kalman Filter
+ 
 
 
 
