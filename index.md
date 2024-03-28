@@ -501,6 +501,8 @@ By running our robot at a constant PWM value and then calculating both the veloc
  ![kf2](assets/lab7/kf2.png)
  ![kf3](assets/lab7/kf3.png)
 
+ # Lab 8: STUNTS!
+
 
 
 
