@@ -483,9 +483,23 @@ However, these random runs seem to be a rare occurrence to each other, because w
 
 # Lab 7: Kalman Filter (Not completed yet)
 ### Objective
+Since our RC car moves faster than the rate of sampling for our TOF sensors, the task of this lab was to implement Kalman filters to predict the location of the car and execute the necessary behaviors  much faster.
+
 ### Kalman Filter
+To first implement our Kalman filter, the first issue was to calculate our drag and momentum. These 2 values were necessary for our calculations.
+![d and m](assets/lab7/vals.png)
+By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values
+![Dist vs vel](assets/lab7/dvsv.png)
+
+![ABC vals](assets/lab7/ABC.png)
+
+![kf](assets/lab7/kf.png)
+
 ### Testing the Kalman Filter
- 
+
+ ![kf1](assets/lab7/kf1.png)
+ ![kf2](assets/lab7/kf2.png)
+ ![kf3](assets/lab7/kf3.png)
 
 
 
