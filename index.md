@@ -513,7 +513,11 @@ the C matrix was also given to us:
 
 ![C](assets/lab7/c.png)
 
-Once we have obtained our A and B matrices, we can discretize them for use in the implementation of the Kalman Filter.
+Once we have obtained our A and B matrices, we can discretize them and instantiate our sigma values for use in the implementation of the Kalman Filter.
+
+![Values](assets/lab7/values.png)
+
+
 Below is the code that was provided to run the Kalman Filter:
 
 ![kf](assets/lab7/KF.png)
