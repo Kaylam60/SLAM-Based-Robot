@@ -487,9 +487,16 @@ Since our RC car moves faster than the rate of sampling for our TOF sensors, the
 
 ### Kalman Filter
 To first implement our Kalman filter, the first issue was to calculate our drag and momentum. These 2 values were necessary for our calculations.
-![d and m](assets/lab7/vals.png)
-By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values
-![Dist vs vel](assets/lab7/dvsv.png)
+
+![d and m](assets/lab7/dm.png)
+
+By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values. To do this I first plotted these values against time on a graph and then calculated d and m.
+
+![Dist vs vel](assets/lab7/graph.png)
+
+To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). Assuming u=1, our drag was 1/average speed. For 
+
+![Actual Valuesl](assets/lab7/dmvalues.png)
 
 ![ABC vals](assets/lab7/ABC.png)
 
