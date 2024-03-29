@@ -501,7 +501,7 @@ To calculate the drag(d) I first had to find the steady-state speed of our RC ca
 
 Assuming u=1, our drag was 1/average speed. For mass(m) we have to find the change in time for our 90% rise time and slot that into the equation above. To find the rise time, I first found out what 90% of my average speed entailed and then traced it on the graph.
 
-![90% speed](assets/lab7/90%.png)
+![90% speed](assets/lab7/90.png)
 
 I found out that my rise time was about 0.9 seconds. The values for d and m are below:
 
