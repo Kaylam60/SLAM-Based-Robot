@@ -497,8 +497,6 @@ By running our robot at a constant PWM value and then calculating both the veloc
 To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). 
 ![Steady state speed](assets/lab7/SSspeed.png)
 
-![DM](assets/lab7/dm.png)
-
 Assuming u=1, our drag was 1/average speed. For mass(m) we have to find the change in time for our 90% rise time and slot that into the equation above. To find the rise time, I first found out what 90% of my average speed entailed and then traced it on the graph.
 
 ![90% speed](assets/lab7/90.png)
@@ -527,10 +525,14 @@ The first test went pretty well. The filter followed the distance pretty closely
 
 ![Values](assets/lab7/kf1val.png)
 
+***
+
 The second test how follows tightly only for a few seconds before the noticeable drift:
 ![kf2](assets/lab7/KF2.png)
 
 ![Values](assets/lab7/kf2vals.png)
+
+***
 
 I decided to test the case where sigma 3 was a large value( highlighting a major skepticism to our sensor values). This causes a large gap between our actual distance values and the filtered distance:
 
@@ -538,6 +540,7 @@ I decided to test the case where sigma 3 was a large value( highlighting a major
 
 ![Values](assets/lab7/kf3vals.png)
 
+***
 
 I decided to decrease sigma 3 for the next two tests and make sigma 1=sigma 2=40.
 I observed that for a sigma 3 of 10, the filtered data followed tightly with the actual data and could give consensus that they were approximately the same:
@@ -546,7 +549,9 @@ I observed that for a sigma 3 of 10, the filtered data followed tightly with the
 
 ![Values](assets/lab7/kf4vals.png)
 
-but by decreasing sigma 3 further by 5, I observed that the filter derived a perfect fit to the actual data which was the best result:
+***
+
+By decreasing sigma 3 further by 5, I observed that the filter derived a perfect fit to the actual data which was the best result:
 ![kf5](assets/lab7/KF5.png)
 
 ![Values](assets/lab7/kf5vals.png)
