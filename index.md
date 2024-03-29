@@ -518,26 +518,35 @@ the C matrix was also given to us:
 Once we have obtained our A and B matrices, we can discretize them for use in the implementation of the Kalman Filter.
 Below is the code that was provided to run the Kalman Filter:
 
-![kf](assets/lab7/kf.png)
+![kf](assets/lab7/KF.png)
 
 ### Testing the Kalman Filter
+The first test went pretty well. The filter followed the distance pretty closely until it was nearing the end with a much more noticeable drift:
 
 ![kf1](assets/lab7/KF1.png)
 
 ![Values](assets/lab7/kf1val.png)
 
+The second test how follows tightly only for a few seconds before the noticeable drift:
 ![kf2](assets/lab7/KF2.png)
 
 ![Values](assets/lab7/kf2vals.png)
- 
+
+I decided to test the case where sigma 3 was a large value( highlighting a major skepticism to our sensor values). This causes a large gap between our actual distance values and the filtered distance:
+
 ![kf3](assets/lab7/KF3.png)
 
 ![Values](assets/lab7/kf3vals.png)
+
+
+I decided to decrease sigma 3 for the next two tests and make sigma 1=sigma 2=40.
+I observed that for a sigma 3 of 10, the filtered data followed tightly with the actual data and could give consensus that they were approximately the same:
 
 ![kf4](assets/lab7/KF4.png)
 
 ![Values](assets/lab7/kf4vals.png)
 
+but by decreasing sigma 3 further by 5, I observed that the filter derived a perfect fit to the actual data which was the best result:
 ![kf5](assets/lab7/KF5.png)
 
 ![Values](assets/lab7/kf5vals.png)
