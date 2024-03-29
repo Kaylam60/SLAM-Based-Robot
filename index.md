@@ -522,23 +522,23 @@ Below is the code that was provided to run the Kalman Filter:
 
 ### Testing the Kalman Filter
 
-![kf1](assets/lab7/Kf1.png)
+![kf1](assets/lab7/KF1.png)
 
-![Values](assets/lab7/kf1vals.png)
+![Values](assets/lab7/kf1val.png)
 
-![kf2](assets/lab7/Kf2.png)
+![kf2](assets/lab7/KF2.png)
 
 ![Values](assets/lab7/kf2vals.png)
  
-![kf3](assets/lab7/Kf3.png)
+![kf3](assets/lab7/KF3.png)
 
 ![Values](assets/lab7/kf3vals.png)
 
-![kf4](assets/lab7/Kf4.png)
+![kf4](assets/lab7/KF4.png)
 
 ![Values](assets/lab7/kf4vals.png)
 
-![kf5](assets/lab7/Kf5.png)
+![kf5](assets/lab7/KF5.png)
 
 ![Values](assets/lab7/kf5vals.png)
 
