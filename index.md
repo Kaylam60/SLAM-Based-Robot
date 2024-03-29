@@ -487,19 +487,61 @@ Since our RC car moves faster than the rate of sampling for our TOF sensors, the
 
 ### Kalman Filter
 To first implement our Kalman filter, the first issue was to calculate our drag and momentum. These 2 values were necessary for our calculations.
-![d and m](assets/lab7/vals.png)
-By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values
-![Dist vs vel](assets/lab7/dvsv.png)
 
-![ABC vals](assets/lab7/ABC.png)
+![d and m](assets/lab7/dm.png)
+
+By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values. To do this I first plotted these values against time on a graph and then calculated d and m.
+
+![Dist vs vel](assets/lab7/graph.png)
+
+To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). 
+![Steady state speed](assets/lab7/SSspeed.png)
+
+![DM](assets/lab7/dm.png)
+
+Assuming u=1, our drag was 1/average speed. For mass(m) we have to find the change in time for our 90% rise time and slot that into the equation above. To find the rise time, I first found out what 90% of my average speed entailed and then traced it on the graph.
+
+![90% speed](assets/lab7/90%.png)
+
+I found out that my rise time was about 0.9 seconds. The values for d and m are below:
+
+![Actual Valuesl](assets/lab7/dmvalues.png)
+
+Using these values we can find our A and B matrices using:
+
+![AB calc](assets/lab7/AB.png)
+
+the C matrix was also given to us:
+
+![C](assets/lab7/c.png)
+
+Once we have obtained our A and B matrices, we can discretize them for use in the implementation of the Kalman Filter.
+Below is the code that was provided to run the Kalman Filter:
 
 ![kf](assets/lab7/kf.png)
 
 ### Testing the Kalman Filter
 
- ![kf1](assets/lab7/kf1.png)
- ![kf2](assets/lab7/kf2.png)
- ![kf3](assets/lab7/kf3.png)
+![kf1](assets/lab7/Kf1.png)
+
+![Values](assets/lab7/kf1vals.png)
+
+![kf2](assets/lab7/Kf2.png)
+
+![Values](assets/lab7/kf2vals.png)
+ 
+![kf3](assets/lab7/Kf3.png)
+
+![Values](assets/lab7/kf3vals.png)
+
+![kf4](assets/lab7/Kf4.png)
+
+![Values](assets/lab7/kf4vals.png)
+
+![kf5](assets/lab7/Kf5.png)
+
+![Values](assets/lab7/kf5vals.png)
+
 
  # Lab 8: STUNTS!
 
