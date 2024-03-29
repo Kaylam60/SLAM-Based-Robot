@@ -494,9 +494,11 @@ By running our robot at a constant PWM value and then calculating both the veloc
 
 ![Dist vs vel](assets/lab7/graph.png)
 
-To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). Assuming u=1, our drag was 1/average speed. For 
+To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). Assuming u=1, our drag was 1/average speed. For mass(m) we have to find the change in time for our 90% rise time and divide by the natural log of 1-0.9. To find the rise time, I first found out what 90% of my average speed entailed and then traced it out on the graph. i found out that my rise time was about 0.9 seconds. The values for d and m are below:
 
 ![Actual Valuesl](assets/lab7/dmvalues.png)
+
+Next 
 
 ![ABC vals](assets/lab7/ABC.png)
 
