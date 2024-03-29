@@ -481,7 +481,7 @@ I had concluded that a Kp of 10 would have been my best estimate, but you will s
 However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.
 
 
-# Lab 7: Kalman Filter (Not completed yet)
+# Lab 7: Kalman Filter 
 ### Objective
 Since our RC car moves faster than the rate of sampling for our TOF sensors, the task of this lab was to implement Kalman filters to predict the location of the car and execute the necessary behaviors  much faster.
 
@@ -557,7 +557,7 @@ By decreasing sigma 3 further by 5, I observed that the filter derived a perfect
 ![Values](assets/lab7/kf5vals.png)
 
 
- # Lab 8: STUNTS!
+# Lab 8: STUNTS!
 
 
 
