@@ -562,10 +562,21 @@ By decreasing sigma 3 further by 5, I observed that the filter derived a perfect
 
 
 # Lab 8: STUNTS!
+### Objective
+The goal of this lab was for our RC car to perform a certain action when it approached a set distance from the wall( whether by turning around or by doing a flip)
 
+### Implementation 
+I decided to take on Task A: Position control, which entailed the car doing a flip upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, flip, and then back to the finishing line as fast as possible.
 
+### Trial 1
+My RC car was able to flip perfectly, but I ran into issues where my RC car would not go back to the finish line.
 
+[![Trial1](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/)
 
+### Trial 2
+On this take, my car was able to flip perfectly and speed its way back to the finish line.
+
+[![Trial2](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/)
 
 
 
