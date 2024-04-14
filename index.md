@@ -572,15 +572,16 @@ I decided to take on Task A: Position control, which entailed the car doing a fl
 My RC car was able to flip perfectly, but I ran into issues where my RC car would not go back to the finish line.
 
 [![Trial1](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/)
-
+* Video got corrupted. Fixing the issue*
+  
 ### Trial 2
 On this take, my car was able to flip perfectly and speed its way back to the finish line.
 
 [![Trial2](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/)
+* Video got corrupted. Fixing the issue*
 
 
-
-
+# Lab 9: Mapping
 
 
 
