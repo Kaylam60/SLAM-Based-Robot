@@ -566,13 +566,24 @@ By decreasing sigma 3 further by 5, I observed that the filter derived a perfect
 The goal of this lab was for our RC car to perform a certain action when it approached a set distance from the wall( whether by turning around or by doing a flip)
 
 ### Implementation 
-I decided to take on Task B: Orientation control, which entailed the car doing a turn upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, turn around, and then back to the finishing line as fast as possible. i had also tried my hands on Task A but issues arose and i couldn't replicate my results so i switched tasks.
+I decided to take on Task B: Orientation control, which entailed the car doing a turn upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, turn around, and then back to the finishing line as fast as possible. I had also tried my hands on Task A but issues arose and I couldn't replicate my results so I switched tasks.
+
+I rewrote my orient function so that I could input values for how I wanted my car to turn. and then used it whenever the set distance was in sight.
+Below is a snippet of my code on how I implemented this:
+
+![Code](assets/lab8/code.png)
+
+
+I realized however that mostly due to the speed of the car, I would have to multiply my distance at least twice before the turn would actually initiate at the distance I wanted, so for my car to turn around 300mm from the wall, the distance the turn is called should be at least 600mm. I also realized that there would be a calibration needed to be implemented in my orient function because the errors in the turns were mostly within 10-12 degrees
+
+Below are my trials with their respective orient angles. The best I achieved was with a set distance of 700mm from the wall and 190 as the orient angle.
 
 ### Trial 1
 
 [![Trial1](http://img.youtube.com/vi/a77Oy4ge4rw/0.jpg)](https://youtube.com/shorts/a77Oy4ge4rw)
 
 *180 in orient function. Turn but not fast enough*
+
 
 ### Trial 2
 
@@ -584,13 +595,13 @@ I decided to take on Task B: Orientation control, which entailed the car doing a
 
 [![Trial3](http://img.youtube.com/vi/32RKWtN5HGk/0.jpg)](https://youtube.com/shorts/32RKWtN5HGk)
 
-*200 degree turn, Overestimate*
+*200-degree turn, Overestimate*
 
 ### Trial 4
 
 [![Trial4](http://img.youtube.com/vi/P-y4RLXxBJM/0.jpg)](https://youtube.com/shorts/P-y4RLXxBJM)
 
-*195 degree turn slight overestimate, leading to continuous turns when within distance*
+*195-degree turn slightly overestimated, leading to continuous turns when within distance*
 
 # Lab 9: Mapping
 
