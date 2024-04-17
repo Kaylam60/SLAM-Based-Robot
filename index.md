@@ -566,20 +566,31 @@ By decreasing sigma 3 further by 5, I observed that the filter derived a perfect
 The goal of this lab was for our RC car to perform a certain action when it approached a set distance from the wall( whether by turning around or by doing a flip)
 
 ### Implementation 
-I decided to take on Task A: Position control, which entailed the car doing a flip upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, flip, and then back to the finishing line as fast as possible.
+I decided to take on Task B: Orientation control, which entailed the car doing a turn upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, turn around, and then back to the finishing line as fast as possible. i had also tried my hands on Task A but issues arose and i couldn't replicate my results so i switched tasks.
 
 ### Trial 1
-My RC car was able to flip perfectly, but I ran into issues where my RC car would not go back to the finish line.
 
-[![Trial1](http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg)](https://youtube.com/shorts/)
-* Video got corrupted. Fixing the issue*
-  
+[![Trial1](http://img.youtube.com/vi/a77Oy4ge4rw/0.jpg)](https://youtube.com/shorts/a77Oy4ge4rw)
+
+*180 in orient function. Turn but not fast enough*
+
 ### Trial 2
-On this take, my car was able to flip perfectly and speed its way back to the finish line.
 
-[![Trial2](http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg)](https://youtube.com/shorts/)
-* Video got corrupted. Fixing the issue*
+[![Trial2](http://img.youtube.com/vi/9eAMIs0gis8/0.jpg)](https://youtube.com/shorts/9eAMIs0gis8)
 
+*Best result.  190 turn in Orient function*
+
+### Trial 3
+
+[![Trial3](http://img.youtube.com/vi/32RKWtN5HGk/0.jpg)](https://youtube.com/shorts/32RKWtN5HGk)
+
+*200 degree turn, Overestimate*
+
+### Trial 4
+
+[![Trial4](http://img.youtube.com/vi/P-y4RLXxBJM/0.jpg)](https://youtube.com/shorts/P-y4RLXxBJM)
+
+*195 degree turn slight overestimate, leading to continuous turns when within distance*
 
 # Lab 9: Mapping
 
