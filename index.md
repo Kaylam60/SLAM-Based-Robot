@@ -481,7 +481,7 @@ I had concluded that a Kp of 10 would have been my best estimate, but you will s
 However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.
 
 
-# Lab 7: Kalman Filter (Not completed yet)
+# Lab 7: Kalman Filter 
 ### Objective
 Since our RC car moves faster than the rate of sampling for our TOF sensors, the task of this lab was to implement Kalman filters to predict the location of the car and execute the necessary behaviors  much faster.
 
@@ -497,11 +497,9 @@ By running our robot at a constant PWM value and then calculating both the veloc
 To calculate the drag(d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed( about 1230m/s). 
 ![Steady state speed](assets/lab7/SSspeed.png)
 
-![DM](assets/lab7/dm.png)
-
 Assuming u=1, our drag was 1/average speed. For mass(m) we have to find the change in time for our 90% rise time and slot that into the equation above. To find the rise time, I first found out what 90% of my average speed entailed and then traced it on the graph.
 
-![90% speed](assets/lab7/90%.png)
+![90% speed](assets/lab7/90.png)
 
 I found out that my rise time was about 0.9 seconds. The values for d and m are below:
 
@@ -515,43 +513,97 @@ the C matrix was also given to us:
 
 ![C](assets/lab7/c.png)
 
-Once we have obtained our A and B matrices, we can discretize them for use in the implementation of the Kalman Filter.
+Once we have obtained our A and B matrices, we can discretize them and instantiate our sigma values for use in the implementation of the Kalman Filter.
+
+![Values](assets/lab7/values.png)
+
+
 Below is the code that was provided to run the Kalman Filter:
 
-![kf](assets/lab7/kf.png)
+![kf](assets/lab7/KF.png)
 
 ### Testing the Kalman Filter
+The first test went pretty well. The filter followed the distance pretty closely until it was nearing the end with a much more noticeable drift:
 
-![kf1](assets/lab7/Kf1.png)
+![kf1](assets/lab7/KF1.png)
 
-![Values](assets/lab7/kf1vals.png)
+![Values](assets/lab7/kf1val.png)
 
-![kf2](assets/lab7/Kf2.png)
+***
+
+The second test how follows tightly only for a few seconds before the noticeable drift:
+![kf2](assets/lab7/KF2.png)
 
 ![Values](assets/lab7/kf2vals.png)
- 
-![kf3](assets/lab7/Kf3.png)
+
+***
+
+I decided to test the case where sigma 3 was a large value( highlighting a major skepticism to our sensor values). This causes a large gap between our actual distance values and the filtered distance:
+
+![kf3](assets/lab7/KF3.png)
 
 ![Values](assets/lab7/kf3vals.png)
 
-![kf4](assets/lab7/Kf4.png)
+***
+
+I decided to decrease sigma 3 for the next two tests and make sigma 1=sigma 2=40.
+I observed that for a sigma 3 of 10, the filtered data followed tightly with the actual data and could give consensus that they were approximately the same:
+
+![kf4](assets/lab7/KF4.png)
 
 ![Values](assets/lab7/kf4vals.png)
 
-![kf5](assets/lab7/Kf5.png)
+***
+
+By decreasing sigma 3 further by 5, I observed that the filter derived a perfect fit to the actual data which was the best result:
+![kf5](assets/lab7/KF5.png)
 
 ![Values](assets/lab7/kf5vals.png)
 
 
- # Lab 8: STUNTS!
+# Lab 8: STUNTS!
+### Objective
+The goal of this lab was for our RC car to perform a certain action when it approached a set distance from the wall( whether by turning around or by doing a flip)
+
+### Implementation 
+I decided to take on Task B: Orientation control, which entailed the car doing a turn upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, turn around, and then back to the finishing line as fast as possible. I had also tried my hands on Task A but issues arose and I couldn't replicate my results so I switched tasks.
+
+I rewrote my orient function so that I could input values for how I wanted my car to turn. and then used it whenever the set distance was in sight.
+Below is a snippet of my code on how I implemented this:
+
+![Code](assets/lab8/code.png)
 
 
+I realized however that mostly due to the speed of the car, I would have to multiply my distance at least twice before the turn would actually initiate at the distance I wanted, so for my car to turn around 300mm from the wall, the distance the turn is called should be at least 600mm. I also realized that there would be a calibration needed to be implemented in my orient function because the errors in the turns were mostly within 10-12 degrees
+
+Below are my trials with their respective orient angles. The best I achieved was with a set distance of 700mm from the wall and 190 as the orient angle.
+
+### Trial 1
+
+[![Trial1](http://img.youtube.com/vi/a77Oy4ge4rw/0.jpg)](https://youtube.com/shorts/a77Oy4ge4rw)
+
+*180 in orient function. Turn but not fast enough*
 
 
+### Trial 2
 
+[![Trial2](http://img.youtube.com/vi/9eAMIs0gis8/0.jpg)](https://youtube.com/shorts/9eAMIs0gis8)
 
+*Best result.  190 turn in Orient function*
 
+### Trial 3
 
+[![Trial3](http://img.youtube.com/vi/32RKWtN5HGk/0.jpg)](https://youtube.com/shorts/32RKWtN5HGk)
+
+*200-degree turn, Overestimate*
+
+### Trial 4
+
+[![Trial4](http://img.youtube.com/vi/P-y4RLXxBJM/0.jpg)](https://youtube.com/shorts/P-y4RLXxBJM)
+
+*195-degree turn slightly overestimated, leading to continuous turns when within distance*
+
+# Lab 9: Mapping
 
 
 
