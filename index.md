@@ -604,7 +604,68 @@ Below are my trials with their respective orient angles. The best I achieved was
 *195-degree turn slightly overestimated, leading to continuous turns when within distance*
 
 # Lab 9: Mapping
+### Objective
+The objective of this lab is to map out a schematic room using the two TOF sensors on the RC car. We generate a map of the room by taking 360 distance measurements from 5 marked locations
+
+### Orientation PID control
+
+![Code](assets/lab9/code.png)
+
+### Plotting readings
+
+![tof1](assets/lab9/tof1.png)
+![tof2](assets/lab9/tof2.png)
+
+![reading 1](assets/lab9/data1.png)
+![reading 2](assets/lab9/data2.png)
+
+![reading_3](assets/lab9/data3.png)
+![reading_4](assets/lab9/data4.png)
+
+![final_map](assets/lab9/final_map.png)
 
 
+### Line-based map
+![line_map](assets/lab9/line_map.png)
 
+![actual_map](assets/lab9/actual_map.png)
 
+# Lab 10: Localization(sim)
+### Objective
+This lab's objective is to implement and simulate a grid localization process with Bayes filter applications.
+
+### Prelab
+Localization is the process of determining where the specific entity ( in this case, the RC car) is located with respect to its surroundings. For our implementation, we divide our map into a 3-dimensionally sized frid of possible robot poses( in the x, y, and theta directions). 
+
+![grid_v](assets/lab10/grid_v.png)
+
+### Implementation
+Below is the code we needed to implement for the proper localization in the simulation run of our RC car
+
+The first function  was created to find the probability of the new pose of the robot. 
+
+![Code1](assets/lab10/code1.png)
+
+The second function
+
+![Code2](assets/lab10/code2.png)
+
+To computationally predict the robot's position
+
+![Code3](assets/lab10/code3.png)
+
+This next function
+
+![Code4](assets/lab10/code4.png)
+
+The last function needed to be implemented was
+
+![Code5](assets/lab10/code5.png)
+### Testing and results
+By implementing the code, the simulation was completed shown below, with the green path being the ground truth, the blue path being the belief of the robot, and the red path being the odometry measurements.
+![simul](assets/lab10/simul.png)
+![simul2](assets/lab10/simul2.png)
+
+[![Test](http://img.youtube.com/vi//0.jpg)](https://youtube.com/shorts/)
+
+# Lab 11: Localization(real)
