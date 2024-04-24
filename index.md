@@ -603,7 +603,7 @@ Below are my trials with their respective orient angles. The best I achieved was
 
 *195-degree turn slightly overestimated, leading to continuous turns when within distance*
 
-# Lab 9: Mapping
+# Lab 9: Mapping(Not completed yet)
 ### Objective
 The objective of this lab is to map out a schematic room using the two TOF sensors on the RC car. We generate a map of the room by taking 360 distance measurements from 5 marked locations
 
@@ -632,40 +632,53 @@ The objective of this lab is to map out a schematic room using the two TOF senso
 
 # Lab 10: Localization(sim)
 ### Objective
-This lab's objective is to implement and simulate a grid localization process with Bayes filter applications.
+This lab's objective is to implement and simulate a grid localization process with Bayes filter applications. A simulator was provided to mimic the behavior of the robot.
 
 ### Prelab
-Localization is the process of determining where the specific entity ( in this case, the RC car) is located with respect to its surroundings. For our implementation, we divide our map into a 3-dimensionally sized frid of possible robot poses( in the x, y, and theta directions). 
+Localization is the process of determining where the specific entity ( in this case, the RC car) is located with respect to its surroundings. 
+A Bayes Filter is a method used by robots to figure out where they are in an environment. It combines what the robot expects to happen(prediction based on control inputs) when it moves with what it actually sees around it(observational data).
+For example: Imagine you're in a room blindfolded and trying to figure out where you are based on how you think you've moved and what you can feel around you. First, you predict where you might be based on how you've moved while considering that sometimes your movements don't go exactly as planned. Then, you correct this prediction by checking your surroundings, rotating to get a better sense of where things are, and using that information to refine your estimate. In the end, you have a bunch of guesses about where you could be and how likely each one is, and these guesses get updated every time you move. This is similar to what we would implement with the RC car. It moves, considers its movements, rotates around, gathers data, and then uses the refined data to move to a better-estimated position.
+
+Below is the rundown application of this in code:
+![bayes](assets/lab10/bayes.png)
+
+For our implementation, we have to divide our map into a 3-dimensionally sized grid of possible robot poses( in the x, y, and theta directions). Our map is of size:
 
 ![grid_v](assets/lab10/grid_v.png)
 
 ### Implementation
-Below is the code we needed to implement for the proper localization in the simulation run of our RC car
+Below is the code we needed to implement for the proper localization in the simulation run of our RC car.
 
-The first function  was created to find the probability of the new pose of the robot. 
+The purpose of this function is to compute the transition from one state to another, which involves two rotations and a translation. We utilize the current and previous position readings to calculate these values, employing trigonometry, and then return them.
 
 ![Code1](assets/lab10/code1.png)
 
-The second function
+Next, our goal is to determine the probability that the robot has arrived at a particular current position x', given its previous position x, and the odometry values u. Initially, we calculate the actual control values required to transition from the previous to the current position by utilizing our compute_control function, which takes the current and previous position parameters as inputs. Subsequently, we utilize a Gaussian distribution to estimate the probability of the robot's movement to the current position, based on the anticipated movement derived from the motion commands it was instructed to follow. This Gaussian distribution is centered on the expected motion of the robot as predicted by the odometry model, with a standard deviation determined by our confidence in the accuracy of the odometry model. Essentially, this function computes the probability P(x′∣x,u), which represents the likelihood of the robot reaching a specific current location x′ given its previous location x and the movement commands u.
 
 ![Code2](assets/lab10/code2.png)
 
-To computationally predict the robot's position
+This next function updates the beliefs and computes the prediction step, by looping through all grids and checking for our probability threshold. If there is a high enough probability, the beliefs are updated.
 
 ![Code3](assets/lab10/code3.png)
 
-This next function
+In the next step of the Bayes Filter process, we aim to refine our estimated location by incorporating sensor data. To do this, we create a function called sensor_model(). This function helps us determine the likelihood that the robot measures a certain distance based on what it should measure given its current position and angle.
+The function produces an array of probabilities, with each value corresponding to a specific measurement angle. 
 
 ![Code4](assets/lab10/code4.png)
 
-The last function needed to be implemented was
+Afterward, we proceed to adjust the robot's estimated location probability distribution. We iterate through all conceivable positions, comparing the expected distance measurements from these positions to the actual sensor readings obtained by the robot at its present location. Then, we execute the update by multiplying the probability P(z∣x) (the likelihood of the sensor readings given a specific position) by the predicted belief loc.bel_bar obtained in the prediction step. Finally, we ensure that the belief distribution is normalized, ensuring that all probabilities sum up to 1.
 
 ![Code5](assets/lab10/code5.png)
+
 ### Testing and results
 By implementing the code, the simulation was completed shown below, with the green path being the ground truth, the blue path being the belief of the robot, and the red path being the odometry measurements.
+
+Below are the results of two of the simulation runs as well as a representative video
+
 ![simul](assets/lab10/simul.png)
 ![simul2](assets/lab10/simul2.png)
 
-[![Test](http://img.youtube.com/vi//0.jpg)](https://youtube.com/shorts/)
+[![Test](http://img.youtube.com/vi/oQw4RU8MwMw/0.jpg)](https://youtu.be/oQw4RU8MwMw)
+* Simulation run video*
 
 # Lab 11: Localization(real)
