@@ -622,13 +622,13 @@ below is the code that I called to turn and take distance reading at a certain i
 ![reading_3](assets/lab9/data3.png)
 ![reading_4](assets/lab9/data4.png)
 
-![final_map](assets/lab9/final_map.png)
+![mashup](assets/lab9/mashup.png)
 
 
 ### Line-based map
 ![line_map](assets/lab9/line_map.png)
 
-![actual_map](assets/lab9/actual_map.png)
+![actual_map](assets/lab9/actual_map.jpg)
 
 # Lab 10: Localization(sim)
 ### Objective
