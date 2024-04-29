@@ -603,32 +603,41 @@ Below are my trials with their respective orient angles. The best I achieved was
 
 *195-degree turn slightly overestimated, leading to continuous turns when within distance*
 
-# Lab 9: Mapping(Not completed yet)
+# Lab 9: Mapping
 ### Objective
 The objective of this lab is to map out a schematic room using the two TOF sensors on the RC car. We generate a map of the room by taking 360 distance measurements from 5 marked locations
 
 ### Orientation PID control
-below is the code that I called to turn and take distance reading at a certain interval. I reused my previous orientation PID control code to incorporate 20 degree turns and instated in a loop that the distance readings at each stop in the turns. 
+Below is the code I called to turn and take distance readings at a certain interval. I reused my previous orientation PID control code to incorporate 20-degree turns and instated in a loop the distance readings at each stop in the turns. I ran into multiple issues with the timings of these readings and the applications of my motors but I was able to get concurrent readings with the right intervals.
 ![Code](assets/lab9/code.png)
 
 ### Plotting readings
-
+Below are polar plots of the distances read with the two sensors on the RC car. This was not necessarily tested in the same environment as the actual map used for the rest of the lab
 ![tof1](assets/lab9/tof1.png)
 ![tof2](assets/lab9/tof2.png)
 
+Theoretically, these two plots should be similar but probably inverse of each other, however, the actual readings from the back sensor and those from the front sensor were too different to be cross-referenced.
+
+I applied a formula to 4 sets of data sets collected from the sensors to perform the coordinate transformation from the cylindrical coordinate system in the robot frame to the Cartesian coordinate system in the global frame. Finally, by adding the offset based on the robot's position in the global frame, the required data arrays were obtained. Results from different observing points were plotted on the scatter plots below:
 ![reading 1](assets/lab9/data1.png)
 ![reading 2](assets/lab9/data2.png)
 
 ![reading_3](assets/lab9/data3.png)
 ![reading_4](assets/lab9/data4.png)
 
+Then I meshed all these data points together into the full map below.
 ![mashup](assets/lab9/mashup.png)
 
 
 ### Line-based map
+The map was estimated manually, as shown in the figure below. I did this by viewing the lab tiles as actual points and estimating where the obstacles would be placed. As you can see my data veers off greatly from the actual map. This is most likely due to a calculation issue that appeared when I was calculating my points
 ![line_map](assets/lab9/line_map.png)
 
+The room to be mapped is shown in the figure below. In this map, each square represents a single grid cell, and the highlighted square in red represents (0, 0). The green ones indicate the locations where the robot collected data from, with coordinates at (0,3), (5,3), (5,-3), and (-3,-2), respectively.
+
 ![actual_map](assets/lab9/actual_map.jpg)
+
+The data points I collected were definitely limited. Obtaining more data would likely result in a more accurate map. One approach could be to reduce the interval between set points for my PID orientation control. For example, stopping and storing data every 10 degrees of rotation (36 readings, instead of 18) would increase the density of data points on the map, and would provide a better estimation of the walls. However, this would require further fine-tuning of the PID control( with much more difficulty due to a bug with my motors) to ensure accurate 10-degree turns each time within a full 360-degree cycle.
 
 # Lab 10: Localization(sim)
 ### Objective
