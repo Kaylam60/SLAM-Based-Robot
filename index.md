@@ -608,7 +608,7 @@ Below are my trials with their respective orient angles. The best I achieved was
 The objective of this lab is to map out a schematic room using the two TOF sensors on the RC car. We generate a map of the room by taking 360 distance measurements from 5 marked locations
 
 ### Orientation PID control
-
+below is the code that I called to turn and take distance reading at a certain interval. I reused my previous orientation PID control code to incorporate 20 degree turns and instated in a loop that the distance readings at each stop in the turns. 
 ![Code](assets/lab9/code.png)
 
 ### Plotting readings
