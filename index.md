@@ -636,10 +636,13 @@ This lab's objective is to implement and simulate a grid localization process wi
 
 ### Prelab
 Localization is the process of determining where the specific entity ( in this case, the RC car) is located with respect to its surroundings. 
+
 A Bayes Filter is a method used by robots to figure out where they are in an environment. It combines what the robot expects to happen(prediction based on control inputs) when it moves with what it actually sees around it(observational data).
+
 For example: Imagine you're in a room blindfolded and trying to figure out where you are based on how you think you've moved and what you can feel around you. First, you predict where you might be based on how you've moved while considering that sometimes your movements don't go exactly as planned. Then, you correct this prediction by checking your surroundings, rotating to get a better sense of where things are, and using that information to refine your estimate. In the end, you have a bunch of guesses about where you could be and how likely each one is, and these guesses get updated every time you move. This is similar to what we would implement with the RC car. It moves, considers its movements, rotates around, gathers data, and then uses the refined data to move to a better-estimated position.
 
 Below is the rundown application of this in code:
+
 ![bayes](assets/lab10/bayes.png)
 
 For our implementation, we have to divide our map into a 3-dimensionally sized grid of possible robot poses( in the x, y, and theta directions). Our map is of size:
