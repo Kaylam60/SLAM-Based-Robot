@@ -609,10 +609,12 @@ The objective of this lab is to map out a schematic room using the two TOF senso
 
 ### Orientation PID control
 Below is the code I called to turn and take distance readings at a certain interval. I reused my previous orientation PID control code to incorporate 20-degree turns and instated in a loop the distance readings at each stop in the turns. I ran into multiple issues with the timings of these readings and the applications of my motors but I was able to get concurrent readings with the right intervals.
+
 ![Code](assets/lab9/code.png)
 
 ### Plotting readings
 Below are polar plots of the distances read with the two sensors on the RC car. This was not necessarily tested in the same environment as the actual map used for the rest of the lab
+
 ![tof1](assets/lab9/tof1.png)
 ![tof2](assets/lab9/tof2.png)
 
@@ -626,6 +628,7 @@ I applied a formula to 4 sets of data sets collected from the sensors to perform
 ![reading_4](assets/lab9/data4.png)
 
 Then I meshed all these data points together into the full map below.
+
 ![mashup](assets/lab9/mashup.png)
 
 
@@ -691,6 +694,7 @@ Below are the results of two of the simulation runs as well as a representative 
 ![simul2](assets/lab10/simul2.png)
 
 [![Test](http://img.youtube.com/vi/oQw4RU8MwMw/0.jpg)](https://youtu.be/oQw4RU8MwMw)
+
 * Simulation run video*
 
 # Lab 11: Localization(real)
