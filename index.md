@@ -699,13 +699,45 @@ Below are the results of two of the simulation runs as well as a representative 
 
 # Lab 11: Localization(real)
 ### Objective
+This lab focused on implementing localization using the Bayes filter on the real robot. 
 
 ### Localization (sim)
+This simulation just reviewed the theoretical run we had done for lab 10 as shown below.
+
+![sim](assets/lab11/sim.png)
 
 ### Localization (real)
+Unlike in simulation where both prediction and update steps are typically performed, in this case, only the update step was executed due to the absence of reliable odometry data for the robot's movement.
+
+To interact with the real robot and collect sensor readings, a class called RealRobot() was created. This class communicated with the robot via Bluetooth and obtained data from sensors, specifically 18 Time-of-Flight (ToF) sensor readings as the robot completed a 360-degree rotation. These readings were then used in the update step of the Bayes filter.
+
+The perform_observation_loop() function within the RealRobot class (shown below) was responsible for orchestrating the robot's rotation and collecting sensor data. Upon receiving commands via Bluetooth, the robot rotated in place while the ToF sensor readings and IMU data were captured. The async and await keywords were used along with the asyncio library to ensure proper synchronization and waiting for the robot to complete its rotation. I decided to just use the MAP command I used previously for lab 9 because it was similar to what I needed to do for this lab.
+
+![sim](assets/lab11/code.png)
+
+After obtaining sensor data, the results were processed and stored in arrays for further use in the localization module.
 
 #### Issues
+I ran into a lot of problems when the robot was rotating. My robot seemed to be going too fast, so it overshot the actual angles it was supposed to stop at( and the gyroscope didn't correct these angles) hence it would pass the 360 mark it was supposed to achieve. I struggled with the issue for the longest time, from trying to slow down my motors, which led to multiple recalibrations, and constantly changing my Kp, Ki, and Kd values for my orientation PID in charge of the turns. I finally reached a point where my robot would turn sub-consistently enough to get the actual data properly.
 
 ### Results
+Localization tests were conducted by placing the robot at specific poses on the map and running the update step of the Bayes filter. the blue dot is the localization belief.
 
-### Conclusion
+![1](assets/lab11/1st.png)
+
+*(5,3)*
+
+![2](assets/lab11/2nd.png)
+
+*(-3,-2)*
+
+![3](assets/lab11/3rd.png)
+
+*(5,-3)*
+
+![4](assets/lab11/4th.png)
+
+*(0,3)*
+
+
+Most of my results seemed close to the actual position of the point with localization at (5, 3) off by a small margin, but at (-3, -2) by a large margin.
