@@ -698,3 +698,14 @@ Below are the results of two of the simulation runs as well as a representative 
 * Simulation run video*
 
 # Lab 11: Localization(real)
+### Objective
+
+### Localization (sim)
+
+### Localization (real)
+
+#### Issues
+
+### Results
+
+### Conclusion
