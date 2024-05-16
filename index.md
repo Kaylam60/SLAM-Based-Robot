@@ -762,7 +762,8 @@ I decided to use a code I had used previously for the showcase and tweak it slig
 
 ![sc](assets/lab12/sc.png)
 
+This actually gave me the best outcome and would race through the points( if it missed one, it would try to go back to it) as it dodged the obstacles. Below is a video of its most successful run.
+
 [![Test](http://img.youtube.com/vi/90iDlEB2zSI/0.jpg)](https://youtu.be/90iDlEB2zSI)
 
-This actually gave me the best outcome and would race through the points( if it missed one, it would try to go back to it) as it dodged the obstacles.Below is a video of its most successful run.
-
+As you can see, the robot would try to change direction at each distance from the wall or obstacles and I tried setting the distance so that it would map onto the points pretty closely, but sometimes it would veer off or get stuck unless physically corrected. But using this obstacle avoidance implementation i was able to get through most of the points (albeit with all the unnecessary ones also)
