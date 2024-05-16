@@ -741,3 +741,28 @@ Localization tests were conducted by placing the robot at specific poses on the 
 
 
 Most of my results seemed close to the actual position of the point with localization at (5, 3) off by a small margin, but at (-3, -2) by a large margin.
+
+
+# Lab 12: Planning and execution
+### Objective
+The objective of this lab was to attempt to  combine all that we have done in the previous labs for a full planning route for our robot
+
+### Implementations and Results
+For my robot, I tried making a function to calculate the distance between a set of points, orient itself, and then move toward that specific point. To do this, I had all the relevant points in an array and then cycled through them in the for loop shown in the code below.  I tried making multiple helper functions to aid my robot. From functions that would check if the robot had reached its destination, if there was an obstacle in the way of the points, etc but all in all my first implementation was quite lacklustre in terms of results. 
+
+![moveto](assets/lab12/move.png)
+
+[![Test](http://img.youtube.com/vi/rGoe1Frs8f4/0.jpg)](https://youtu.be/rGoe1Frs8f4)
+
+I had also tried hard coding the path of the robot at each point but when testing on the map, my robot would just move forward to the first point, then continuously spin in a circle, thus making me recycle this option
+
+![hardcode](assets/lab12/lab12.png)
+
+I decided to use a code I had used previously for the showcase and tweak it slightly so that my robot would attempt to hit all the points during its run.
+
+![sc](assets/lab12/sc.png)
+
+[![Test](http://img.youtube.com/vi/90iDlEB2zSI/0.jpg)](https://youtu.be/90iDlEB2zSI)
+
+This actually gave me the best outcome and would race through the points( if it missed one, it would try to go back to it) as it dodged the obstacles.Below is a video of its most successful run.
+
