@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECE 4160 Labs - Kofi Ohene Adu</title>
+    <style>
+        /* Dark Mode Theme */
+        :root {
+            --bg-color: #1a1a1a;
+            --main-bg-color: #2a2a2a;
+            --card-bg-color: #333333;
+            --text-color: #f0f0f0;
+            --heading-color: #ffffff;
+            --link-color: #64b5f6;
+            --border-color: #444;
+            --highlight-color: #64b5f6;
+        }
+
+        /* General Body and Layout */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Main Flex Container for the layout */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+            background-color: var(--main-bg-color);
+        }
+
+        /* Table of Contents Container (TOC) */
+        .toc-container {
+            width: 300px;
+            background-color: var(--card-bg-color);
+            box-shadow: 4px 0 12px rgba(0, 0, 0, 0.2);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0);
+            z-index: 1000;
+        }
+
+        .toc-container.hidden {
+            transform: translateX(-100%);
+        }
+        
+        /* Main content area */
+        .content-container {
+            flex-grow: 1;
+            padding: 2rem;
+            max-width: 960px;
+            margin: 0 auto;
+            transition: margin-left 0.3s ease-in-out;
+        }
+        
+        .main-container.toc-hidden .content-container {
+            margin-left: 0;
+            max-width: 100%;
+        }
+
+        /* Toggle Button */
+        .toc-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background-color: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            font-size: 1.25rem;
+            line-height: 1;
+        }
+
+        .toc-toggle:hover {
+            background-color: #539ed8;
+            transform: scale(1.05);
+        }
+
+        .toc-container h2 {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .toc-container ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .toc-container li {
+            background-color: #444;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .toc-container a {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-container li:hover {
+            transform: translateX(5px);
+            background-color: #555;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Styling for "Lab Cards" */
+        .lab-card {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            border-left: 5px solid var(--highlight-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .lab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Headings and Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--heading-color);
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--link-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-thumbnail {
+            display: block;
+            width: 100%;
+            max-width: 640px;
+            margin: 1.5rem auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-thumbnail img {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0;
+            border-radius: 0;
+        }
+
+        .video-thumbnail::before {
+            content: '\25BA'; /* Play button icon */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            width: 5rem;
+            height: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-thumbnail:hover::before {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* Markdown-style blockquotes for notes */
+        blockquote {
+            background: #444;
+            border-left: 5px solid var(--highlight-color);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* Minor improvements for aesthetics */
+        code {
+            background-color: #444;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #fff;
+        }
+    
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .toc-container {
+                width: 100%;
+                height: auto;
+                position: static;
+                transform: none;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .toc-container.hidden {
+                transform: translateY(-100%);
+            }
+
+            .content-container {
+                padding: 1rem;
+                margin-top: 0;
+            }
+
+            .toc-toggle {
+                position: sticky;
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<button class="toc-toggle" id="toc-toggle-button">☰</button>
+
+<div class="main-container" id="main-container">
+    <div class="toc-container" id="toc-container">
+        <h2>Table of Contents</h2>
+        <ul>
+            <li><a href="#lab-1-introduction-to-artemis">Lab 1: Introduction to Artemis</a></li>
+            <li><a href="#lab-2-imu">Lab 2: IMU</a></li>
+            <li><a href="#lab-3-tof">Lab 3: TOF</a></li>
+            <li><a href="#lab-4-motors-and-open-loop-control">Lab 4: Motors and Open Loop Control</a></li>
+            <li><a href="#lab-5-pid-control-linear-pid-control-and-linear-interpolation">Lab 5: PID Control</a></li>
+            <li><a href="#lab-6-orientation-pid-control">Lab 6: Orientation PID Control</a></li>
+            <li><a href="#lab-7-kalman-filter">Lab 7: Kalman Filter</a></li>
+            <li><a href="#lab-8-stunts">Lab 8: STUNTS!</a></li>
+            <li><a href="#lab-9-mapping">Lab 9: Mapping</a></li>
+            <li><a href="#lab-10-localization-sim">Lab 10: Localization (sim)</a></li>
+            <li><a href="#lab-11-localization-real">Lab 11: Localization (real)</a></li>
+            <li><a href="#lab-12-planning-and-execution">Lab 12: Planning and execution</a></li>
+        </ul>
+    </div>
+
+    <div class="content-container">
+        <header>
+            <h1>ECE 4160</h1>
+            <p>My name is Kofi Ohene Adu (kao65). This page contains the labs I have completed for this course. I am an electrical and computer engineering student, with an interest in robotics and languages. I like video games, playing the guitar, and pretty much like listening to music in general.
+            Welcome to my Fast Robots page! This is a work in progress!</p>
+        </header>
+
+        <div class="lab-card">
+            <h2 id="lab-1-introduction-to-artemis">Lab 1: Introduction to Artemis</h2>
+            <h3>Part 1</h3>
+            <p>The objective of this part of the lab is to test Artemis board functionality, by testing the LED, Temperature sensor, Serial output, and microphone.</p>
+
+            <h4>"Example 1: Blink it Up"</h4>
+            <p>The “Blink it Up” example was used for this portion of the lab. The code, when compiled would turn the LED on for a specified amount of time, then would turn it off. Below is the result:</p>
+            <a href="https://www.youtube.com/watch?v=sf7wSSynCig" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/sf7wSSynCig/0.jpg" alt="Blink Test Video">
+            </a>
+            <blockquote>Note: Will take you to the video itself</blockquote>
+
+            <h4>"Example 4: Serial"</h4>
+            <p>This example found under Artemis examples, was used to test the serial monitor output. It would print out any messages that were typed in the input space, as seen in the image below.</p>
+            <img src="assets/lab1/ex_4serial.png" alt="Serial Test">
+            <blockquote>Serial test Image</blockquote>
+
+            <h4>"Example 2: Analog Read"</h4>
+            <p>This example was used to test the temperature sensor on the Artemis board. The test would send the temperature reading and time to the serial monitor and would slightly change the temperature number as I applied warm air. ( Change is tiny, about 0.2 from 33.7 to 33.9, likely due to the surrounding room temperature being warmer than usual). Below is the result</p>
+            <a href="https://www.youtube.com/shorts/-SnpcKFRFgw" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/-SnpcKFRFgw/0.jpg" alt="Temperature Test Video">
+            </a>
+            <blockquote>Note: Will take you to the video itself</blockquote>
+
+            <h4>"PDM/Example 1: Microphone Output"</h4>
+            <p>The microphone output example was used to show the frequencies picked up by the Artemis board. There would be a slight change as I released a higher-pitched whistle in time and would decrease as I stopped. Below is an image and video of this:</p>
+            <img src="assets/lab1/ex_1micout.png" alt="Mic Test">
+            <blockquote>Mic test Image</blockquote>
+            <a href="https://www.youtube.com/shorts/9HuIhQY1Gsg" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/9HuIhQY1Gsg/0.jpg" alt="Mic Test Video">
+            </a>
+            <blockquote>Note: Will take you to the video itself</blockquote>
+
+            <h3>Part 2: Bluetooth Setup</h3>
+            <p>The objective of this part of the lab was to establish a Bluetooth connection between the Artemis board and the computer and to indicate its functionality. In this section, we worked in tandem with both Arduino and Python (using Jupiter lab) to connect the Artemis through Bluetooth, then send data to the board over Bluetooth as well</p>
+
+            <h4>Prelab</h4>
+            <p>We were tasked with installing the virtual environment that was to be used during the rest of the labs and installing the necessary packages for it. Next was to unzip the codebase to be used during this lab and the later ones also. Next was to find and change the necessary MAC address and UUIDs for our individual Artemis boards. The change is to be made in the ble_arduino.ino file in the ble codebase. Since many boards could share the same MAC address, also using their UUIDs is a recommended step. This change would be replicated in the connection.yaml file shown.</p>
+            <img src="assets/lab1/mac.png" alt="Mac Address">
+            <blockquote>Mac Address</blockquote>
+            <img src="assets/lab1/uuid.png" alt="UUID">
+            <blockquote>UUID</blockquote>
+            <img src="assets/lab1/connections_ard.png" alt="Arduino Connections">
+            <img src="assets/lab1/connections.png" alt="Python Connections">
+            <blockquote>Connections in both Arduino and Python files</blockquote>
+
+            <h4>The Connect</h4>
+            <img src="assets/lab1/connect.png" alt="BLE Connection">
+            <blockquote>How ble connection is done</blockquote>
+
+            <h4>"ECHO" Command</h4>
+            <p>An ECHO command was to be implemented to test the connection between the computer and the Artemis board. This command would send a character string to the board from the Python code, then when printed, it would send the phrase back to the Python code.</p>
+            <img src="assets/lab1/echo.png" alt="Echo Implementation">
+            <blockquote>Echo Implementation</blockquote>
+            <img src="assets/lab1/echoresult.png" alt="Echo Results">
+            <blockquote>Echo results</blockquote>
+            <blockquote>Note: Whenever a new command was to be created it was to be added to the CommandTypes list. Each command would have an assigned value addressed to it and then we would need to add that command and its value to the cmdtypes file on Jupyter Notebook, as shown below.</blockquote>
+            <img src="assets/lab1/cmdarduino.png" alt="Arduino CMDs">
+            <img src="assets/lab1/cmd.png" alt="Jupyter CMDs">
+
+            <h4>"GET_TIME_MILLIS" Command</h4>
+            <p>This implementation involved receiving the current time from the Artemis board. This involved using the <code>millis()</code> function to get the current time in milliseconds and then convert it to an int. The result was presented as a string. The implementation is shown below.</p>
+            <img src="assets/lab1/get_time.png" alt="GET_TIME_MILLIS">
+
+            <h4>GET_TIME Command</h4>
+            <img src="assets/lab1/get_time2.png" alt="GET_TIME">
+
+            <h4>Notification Handler</h4>
+            <p>The notification handler is used to automatically receive the data sent by the Artemis board without manually calling the data each time. For the code, I decided to use an array at each initialization of the code so that all the data would be put in an array, whether it was a single value or an assortment of them. This piece of Python code will be very helpful as we create multiple functions to collect data (including those containing arrays)</p>
+            <img src="assets/lab1/notif_handler.png" alt="Notification Handler">
+            <p>Whenever the notification handler is being used, it is “told” to collect the data received by calling the <code>start_notify()</code> function as shown below.</p>
+            <img src="assets/lab1/gtmpy.png" alt="start_notify">
+            <p>This is done only once for the handler to function. To stop the handler from collecting information, we just issue the <code>stop_notify()</code> command on the Python file</p>
+            <img src="assets/lab1/stpnotif.png" alt="stop_notify">
+            
+            <h4>"SEND_TIME_DATA" Command</h4>
+            <p>This command was used to get each time reading for 50 seconds. Similar to the GET_TIME_MILLIS command it would get the current time at each iteration of the loop and then put it in a time array to be received by the notification handler.</p>
+            <img src="assets/lab1/send_t_data.png" alt="SEND_TIME_DATA Arduino">
+            <img src="assets/lab1/std.png" alt="SEND_TIME_DATA Python">
+            
+            <h4>"GET_TEMP_READINGS" Command</h4>
+            <p>This command involved extracting many temperature readings in the span of a few seconds. For this code, I created another array to hold the temperature reading and then appended each value in the array to its corresponding time value. The data was then sent as strings by a for loop to the Python code. This reduced the need to have another command to send the data just like in the SEDN_TIME_DATA command</p>
+            <img src="assets/lab1/temp_readings.png" alt="GET_TEMP_READINGS Arduino">
+            <img src="assets/lab1/temppy.png" alt="GET_TEMP_READINGS Python">
+            
+            <h3>A Limitation</h3>
+            <p>The Artemis Board has a maximum storage of 384 kB of RAM. If we sampled 16-bit values at an average frequency every 50 seconds, we would be able to create about less than 30 values before the storage on the Artemis board would run out. Sending data in groups would thus optimize the speed of data acquisition from the Artemis board.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-2-imu">Lab 2: IMU</h2>
+            <p>The goal of this lab was to set up the integration between the Artemis board and the imu to gather the robot's relative angular orientation data (pitch, roll, and yaw). Another step was to enable the Artemis board the ability to send this data over Bluetooth for processing.</p>
+
+            <h3>Setup the IMU</h3>
+            <p>First, we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.</p>
+            <img src="assets/lab2/imu.png" width="250" height="250" alt="IMU Board">
+            <p>Next up is running The Example1_BAsics code under the ICM 20948 library to test that our IMU is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:</p>
+            <a href="https://www.youtube.com/watch?v=XSVtera0Tec" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/XSVtera0Tec/0.jpg" alt="IMU Test Video">
+            </a>
+            <blockquote>Note: The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.</blockquote>
+            <img src="assets/lab2/ad_val.png" alt="AD0_VAL change">
+
+            <h3>Accelerometer</h3>
+            <p>The accelerometer is the component of the IMU that is used to find linear acceleration, however, there is a method by which we can calculate the pitch and roll of the robot, using <code>atan2</code> as shown below:</p>
+            <img src="assets/lab2/accel.png" alt="Accelerometer Code">
+            <p>Where both are found by using their unneeded axes (X and Z for pitch, Y and Z for Roll).</p>
+            <p>Below is the graph achieved from rotating the IMU between -90 and 90 along the edge of my table</p>
+            <img src="assets/lab2/accel_raw.png" alt="Raw Accelerometer Plot">
+            <p>As you can see, our plot has a lot of noise so to fix this, a low pass filter was to be created. I first analyzed the data by transferring it into Fourier Transform format to single out the fundamental frequency, then I made the low pass filter using the code below</p>
+            <img src="assets/lab2/fourier.png" alt="Fourier Transform Code">
+            <img src="assets/lab2/lpf.png" alt="Low Pass Filter Code">
+            <p>and we achieved a cleaner plot due to this implementation.</p>
+            <img src="assets/lab2/lpf_plot.png" alt="Low Pass Filter Plot">
+            <blockquote>Note: To ensure the angles for my pitch and roll were between -90 and 90, I implemented a constraining angle. I used this when we needed our angles in this specific range.</blockquote>
+            <img src="assets/lab2/constraint.png" alt="Constraint Code">
+
+            <h3>Gyroscope</h3>
+            <p>Next up was to implement the gyroscope. Unlike the accelerometer, the gyroscope measures the rate of angular change. Using the gyroscope is another way of getting the needed orientation data, without the risk of noise. The roll, pitch, and yaw can be calculated as in the code snippet below, where <code>dt</code> is the sampling frequency.</p>
+            <img src="assets/lab2/gyro.png" alt="Gyroscope Code">
+            <p>There is an underlying issue though. Due to how the gyroscope pitch, roll, and yaw are all calculated, there can be a drift from the actual data readings over time. Hence even with the constraint implementation I created earlier, there are some large outliers present in the plotted data.</p>
+            <img src="assets/lab2/gyro_raw.png" alt="Raw Gyroscope Plot">
+            <p>To fix this issue, we were tasked with the implementation of a complimentary filter that would take both our pitch and roll values from both the gyroscope and the accelerometer to give more accurate data readings</p>
+            <img src="assets/lab2/cf.png" alt="Complimentary Filter Code">
+            <img src="assets/lab2/filter_plot.png" alt="Filtered Plot">
+
+            <h3>Sample Data</h3>
+            <p>I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.</p>
+
+            <h3>Stunt</h3>
+            <a href="https://www.youtube.com/shorts/SvHxav7Waao" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/SvHxav7Waao/0.jpg" alt="Stunt Video">
+            </a>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-3-tof">Lab 3: TOF</h2>
+            <p>The objective of this lab was to set up the time of flight sensors (TOF) that we would use for calculating distance on our robot. This would be very important to make sure the robot can execute stunts effectively whilst dodging obstacles.</p>
+            
+            <h3>The VL53L1X Sensor</h3>
+            <img src="assets/lab3/tof.jpg" width="250" height="250" alt="VL53L1X Sensor">
+            <p>For the schematic of my robot, I decided to put the TOF sensors on the ends of the robot since that would be the main direction of motion and would be more reliable for collecting collision distance data compared to the sides. This would also decrease the angle of rotations it would need to take to map the data in a 360 view around it.</p>
+            <img src="assets/lab3/wiring.png" width="250" height="250" alt="TOF Wiring">
+            <p>I hooked up one TOF sensor to my Artemis and then ran the Example05_Wire_I2C to find its I2C address.</p>
+            <img src="assets/lab3/i2c.png" alt="I2C Address Output">
+            <p>By default, both sensors were set to 0x29 (or 0x52, which is just the same bits right shifted). When both are hooked up, addresses 0x1 to 0x7e were all detected, so it took some time singling out the necessary addresses needed for our implementation</p>
+
+            <h3>Time of flight modes</h3>
+            <p>The sensors we were dealing with have two modes currently available: Short (1.3m) and Long (4m), which is the default. For our purposes, I decided to use the short mode, due to our need to map out obstacles in closer proximity to the robot and dodge them during its run. The way to set this mode for both sensors would be to use the <code>.setDistanceModeShort()</code> command</p>
+            <img src="assets/lab3/graph.png" alt="Short Mode Graph">
+
+            <h3>Multiple TOF sensors</h3>
+            <p>As I mentioned earlier, both our TOF sensors defaulted to the same address, so if you set them to measure distances, you would observe that the data values would be highly inaccurate. To fix this, we change the address of one of the TOFs, by turning the second one off (with the use of a shutdown_pin), changing the first's address, and then turning the second back on. Now our TOF sensors have different addresses!</p>
+            <img src="assets/lab3/tof_sensors.png" alt="TOF Sensors Code">
+            <p>Now we can test their functionality. As seen in the image below, one sensor has drastically different distance readings than the other.</p>
+            <img src="assets/lab3/both_functionality.png" alt="Both TOF Sensors Functionality">
+            <blockquote>Sensor 1 has an Obstacle in closer proximity to it hence the lesser values</blockquote>
+            <p>I did make an observation. The sensors, especially when both connected would print out distances at a much slower rate, When printed with time, I found my distances would be sent out with around a 5s delay. This shows that the limiting factor was the time taken for the TOF sensor to gather data.</p>
+            
+            <h3>Bluetooth functionality</h3>
+            <p>Next up was to transfer our code to the BLE Arduino file so that we could call our TOF sensors to record data and send it over Bluetooth. I did this by putting the need code to find the distance in a new case block, and making sure the needed setup code was running as well.</p>
+            <img src="assets/lab3/ble_tof.png" alt="BLE TOF Code">
+            <img src="assets/lab3/tof_setup.png" alt="TOF Setup Code">
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-4-motors-and-open-loop-control">Lab 4: Motors and Open Loop Control</h2>
+            <p>( in progress)</p>
+            <h3>Prelab</h3>
+            <p>Below is the configuration I planned to follow for my RC car</p>
+            <img src="assets/lab4/Plan.jpg" width="350" height="350" alt="RC Car Plan">
+            <p>I decided to keep the connector we initially had for our RC car and then connect that to the Vin and GND pins on the motor drivers. This allowed us to connect the 3.7V battery to the motors and remove it for things like charging. This is mainly because the battery needed for the motors was different from the one needed for the Artemis.</p>
+            <p>To set up the motor drivers to be able to pick up the PWM signals we send from the Artemis, we need to ensure that the pins we use to connect them allow such signals to be transmitted in the first place. Using the documentation for the Redboard Nano to locate the pins that allowed PWM signals, I decided to use pins 6, 7, 11, and 12 for my motors.</p>
+
+            <h3>Setup</h3>
+            <p>For this lab, we opened up the RC car, took out the motherboard and left connections in the chassis, and then replaced them with our motor driver connections. For all the tests we needed we would use an oscilloscope, a power supply, our RC car with the Artemis connected, and the method by which we upload our code ( a laptop in my case). The image below shows the general setup I used:</p>
+            <img src="assets/lab4/setup.jpg" width="350" height="250" alt="Lab Setup">
+
+            <h3>analogWrite</h3>
+            <p>The <code>analogWrite</code> function was what would enable us to send PWM signals to the motor driver for the selective wheels to rotate either clockwise or anticlockwise. The first parameter of the function would highlight which pin on the Artemis the driver is connected to. And since each pin had its selective direction, we could also use these to indicate the direction of the car. Let's say clockwise is forward and anticlockwise is backward in my implementation. Forward pins are pin 6 and pin 11. Backward pins are pin 7 and pin 12. Using the code below:</p>
+            <img src="assets/lab4/analogWrite.png" alt="analogWrite Code">
+            <p>dependent on what motorPin1 was set to, the pair of wheels on either side would rotate. If motorPin1 was equal to 7 then the wheels on the left side of the RC car would move it "backwards".</p>
+
+            <h3>Oscilloscope Test</h3>
+            <p>To test that the PWM signals were being generated properly, we used the oscilloscope to visualize it. I used a DC power supply of about 3.73V and 0.004A to simulate the signals we would get when the oscillator clip was connected to the output of the motor driver.</p>
+            <img src="assets/lab4/1_motor.jpg" width="350" height="500" alt="Motor Connected">
+            <blockquote>One Motor Connected</blockquote>
+            <p>Using the Arduino example <code>analogWrite</code>, I enabled pin 7 and then saw as the oscilloscope picked up the waveform.</p>
+            <img src="assets/lab4/osc_read.jpg" width="350" height="200" alt="Oscilloscope Reading">
+            <blockquote>Waveform of PWM signal</blockquote>
+            <p>Below is a video of the selected pin motors rotating.</p>
+            <a href="https://youtube.com/shorts/v5g4AhH0_x4" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg" alt="Motor Test Video">
+            </a>
+            <blockquote>Note: Will take you to the video itself</blockquote>
+
+            <h3>Final Product</h3>
+            <p>Once I had ensured that both motor drivers worked correctly, minimized the wiring exposure to mitigate the problem of the wires snagging on the wheels when they rotated. The top image shows the motors soldered to their respective wiring. The bottom image shows</p>
+            <img src="assets/lab4/schematic_look.jpg" width="350" height="400" alt="Motors Visible">
+            <blockquote>Motors Visible</blockquote>
+            <img src="assets/lab4/final product.jpg" width="350" height="400" alt="Motors Not Visible">
+            <blockquote>Motors not visible</blockquote>
+
+            <h3>PWM and Calibration</h3>
+            <p>The lowest value my <code>analogWrite</code> function would take for the wheels to generate motion was around 40 - 50. 60 seems to be the threshold for which the wheels would rotate at a quick pace and sync up after a small delay</p>
+            <p>So to account for this slight delay, I decided to start the wheels that had a delay first, then start the second set of wheels after about 2 seconds (which seemed to be the average delay between the two)</p>
+            <p>Below is a video showing the RC car moving in a straight line for about 10-11 tiles. Each tile represents about 1-foot-by-1-foot, so we can assume that the RC car traveled a distance of at least 10 feet before going off-axis.</p>
+            <a href="https://youtube.com/shorts/EIBG5ZQepQ0" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg" alt="RC Car Straight Line Run">
+            </a>
+            <blockquote>Note: Will take you to the video itself</blockquote>
+            <p>There still need to be further tweaks if I want the RC car to continuously run in a straight line.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-5-pid-control-linear-pid-control-and-linear-interpolation">Lab 5: PID Control: Linear PID control and Linear interpolation</h2>
+            <h3>Objective</h3>
+            <p>The objective of this lab was to implement a PID controller that would be used to allow the car to avoid obstacles. The implementation of this we used was to stop the car at a set distance of 200mm from a wall autonomously.</p>
+
+            <hr>
+
+            <h3>Prelab</h3>
+            <p>For this lab, we had to implement a handler that would store all the data we would need to analyze for our PID controller. We would run a function that would initiate the PID controller and then store that data in arrays. We would later plot these values and make conclusions of suitable values for the parameters needed in our PID controller.</p>
+            <img src="assets/lab5/debug_data.png" alt="Debug Data">
+
+            <hr>
+
+            <h3>PI Implementation</h3>
+            <p>I planned to use a full PID implementation for my controller, but the best results I achieved were with the PI controller. The formula below gives a rough idea of how it would be calculated with e being the error(target- actual distance)</p>
+            <img src="assets/lab5/formula.png" alt="PID Formula">
+            <p>I used this formula to construct my PID. I made a new function PID() that would take a target distance as an input. I gave this function a parameter in case we ever wanted to change our target distance. I initialized the timer count and first tested to see how much time would pass to gain each calculation of the PID later implemented in the function and found that the range was mostly between 0.01 and 0.02 ms. So I decided to hardcode the change in time to a constant value of 0.01 if there were any times dt was recorded as 0 ( a random error) since it was the most frequent dt value (this was mostly done to avoid a nan error when calculating the PID whenever dt was calculated to be 0). I would then initiate the TOF sensor to start recording distances, only when there was data present and then save it in the variable 'distance'. This would be the actual distance between the wall and the front of the RC car where I place my TOF sensor. The error was just the difference between the actual distance and the target distance and the signs were accounted for and would be further used in the PID calculation. I decided to split the PID calculation into three parts to make it easier to test each part: The proportional aspect(P), the Integral(I), and the derivative(D). I implemented each part to their respective implementations in the formula shown earlier.</p>
+            <img src="assets/lab5/pid.png" alt="PID Code">
+            <p>I implemented if statements that would execute the necessary behaviors in the car concerning the PID values. If positive( meaning that the car is further away than the target distance), then move forward at a decreasing amount of speed=PID( and forward was linked to certain pins so we initialized those pins). If negative, the car moves backward instead( so we initialized the backward pins instead) at a speed=-PID(since PID values would be negative if there is an overshoot). I realized I would encounter movement errors if the car didn't stop before the pins were switched so, I incorporated that into my if statement too. I also accounted for if the PID was set to 0. This would mean that the error would be 0 and hence the car should come to a stop at that distance. I also accounted for if the speed was past the limit whether positive or negative and set them to an upper limit of 255</p>
+
+            <hr>
+
+            <h3>Test Runs and Data Extracted</h3>
+            <p>To test my implementation, I created a new case statement that would call PID() (with a target distance of 300mm) for a set number of seconds ( where val is our timer in a sense).</p>
+            <img src="assets/lab5/run.png" alt="Run Code">
+            <p>This command would be called by Python and would run the trials and give us the data we need to analyze.</p>
+
+            <hr>
+
+            <h4>P controller</h4>
+            <p>For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, 0.1, 0.11, and 0.12. All these trials were tested within 1110-1200mm from the wall( or pillow in the video case)</p>
+            <a href="https://youtube.com/shorts/em1e_gkeJNE" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/em1e_gkeJNE/0.jpg" alt="PID Trial 1">
+            </a>
+            <blockquote>Trial run 1. Kp=0.3</blockquote>
+            <img src="assets/lab5/trial1.png" alt="Kp=0.3 graph">
+
+            <hr>
+
+            <a href="https://youtube.com/shorts/6Mn24eUHIJc" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/6Mn24eUHIJc/0.jpg" alt="PID Trial 2">
+            </a>
+            <blockquote>Trial run 2. Kp=0.15</blockquote>
+            <img src="assets/lab5/trial_2.png" alt="Kp=0.15 graph">
+
+            <hr>
+
+            <img src="assets/lab5/trial3.png" alt="Kp=0.1 graph">
+            <blockquote>Note: Car stops at about 340mm</blockquote>
+
+            <hr>
+
+            <img src="assets/lab5/trial_4.png" alt="Kp=0.11 graph">
+
+            <hr>
+
+            <a href="https://youtube.com/shorts/7DNZ9yC7FX4" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg" alt="Best Kp Trial">
+            </a>
+            <blockquote>Trial run 3. Kp=0.12</blockquote>
+            <img src="assets/lab5/best_Kp.png" alt="Best Kp graph">
+            <blockquote>Note: Car stops at about 295-315 mm (fluctuates with each run)</blockquote>
+
+            <hr>
+
+            <h4>PI controller</h4>
+            <p>Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:</p>
+            <a href="https://youtube.com/shorts/DqiHZIKDnOU" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg" alt="PI Trial 4">
+            </a>
+            <blockquote>Trial run 4. Ki=0.0.0004</blockquote>
+            <img src="assets/lab5/trial_2ki.png" alt="Ki=0.0004 graph">
+
+            <hr>
+            <a href="https://youtube.com/shorts/qJ9iUuuDL8w" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg" alt="PI Trial 5">
+            </a>
+            <blockquote>Trial run 5. Ki=0.0003</blockquote>
+            <img src="assets/lab5/2nd_best.png" alt="Ki=0.0003 graph">
+            <blockquote>Note: Car stops at 294mm</blockquote>
+
+            <hr>
+
+            <a href="https://youtube.com/shorts/q6aYRcWZisU" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/q6aYRcWZisU/0.jpg" alt="PI Trial 6">
+            </a>
+            <blockquote>Trial run 6. Ki=-0.0002</blockquote>
+            <img src="assets/lab5/best.png" alt="Ki=0.0002 graph">
+            <blockquote>Note: Car stops around 304-307mm)</blockquote>
+            <p>I had observed that with Kp=0.12 and Ki=0.0002, I had become sparingly close to my set target distance of 300mm and I could decide to incorporate the D aspect of the PID to resolve this minor issue.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-6-orientation-pid-control">Lab 6: Orientation PID control</h2>
+            <h3>Objective</h3>
+            <p>The objective of this lab is to implement a PID controller that corrects the orientation of our RC car in response to an orientation change/shift using the IMU.</p>
+            
+            <h3>P implementation</h3>
+            <p>Similar to the implementation of the linear PID controller, my primary objective was to implement a P controller that would control the yaw of the robot in response to a certain error obtained by subtracting the current angle from the desired angle (0 degrees in this case). The controller would then respond by alternating wheel rotations in a certain direction (left or right) to decrease this error to zero. Once the error equates to zero the robot stops moving.</p>
+            <img src="assets/lab6/code.png" alt="Orientation PID Code">
+            <blockquote>Arduino Implementation</blockquote>
+            <p>Since I would need a different set of K values for this controller I instantiated a new set of Kp, Ki, and Kd values, and then set them all to 0 as seen below. To test I would change the Kpo variable's value and observe the results.</p>
+            <img src="assets/lab6/k_values.png" alt="K values">
+            <blockquote>K values</blockquote>
+            <p>Though not as present, there were some instances where dt would be considerably large on the first instantiation of the robot, so to account for this I put a cap on what dt could be considered. This made sure our Yaw values did not drift to extreme instances.</p>
+            <img src="assets/lab6/error_fixing.png" alt="Dt error fix">
+            <blockquote>Dt error fix</blockquote>
+            
+            <h3>P controller</h3>
+            <p>To implement the controller, I decided to only change the Kpo variable and leave the others at zero. I first tested with multiples of 5 and then would center around a margin if one of the Kp values was closer to the desired results. Below are my trials for different KP values For the trial with a KP value of 5, small changes in orientation would make the robot try to compete against them, but with a slight overshoot over time. I also observed that when done from a different direction, the controller in a sense"shuts off" and didn't do anything about the orientation change.</p>
+            <a href="https://youtube.com/shorts/FhUqBIZqNwc" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/FhUqBIZqNwc/0.jpg" alt="Trial 1">
+            </a>
+            <blockquote>Trial run 1. Kp=5</blockquote>
+            <p>Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate.</p>
+            <a href="https://youtube.com/shorts/ysdbTV0sTpQ" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg" alt="Trial 2">
+            </a>
+            <img src="assets/lab6/kp10.png" alt="Kp=10 graph">
+            <blockquote>Trial run 2. Kp=10</blockquote>
+            <p>I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin.</p>
+            <a href="https://youtube.com/shorts/zehcrj7XeiY" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/zehcrj7XeiY/0.jpg" alt="Trial 3">
+            </a>
+            <img src="assets/lab6/kp20.png" alt="Kp=20 graph">
+            <blockquote>Trial run 3. Kp=20</blockquote>
+            <p>I decided to get back to the values between 5 and 10 since I had achieved decent results around them. These are the trials of Kp = 6. Kp=7 and Kp=8.</p>
+            <a href="https://youtube.com/shorts/lvhvP0U0Vkc" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/lvhvP0U0Vkc/0.jpg" alt="Trial 4">
+            </a>
+            <img src="assets/lab6/kp6.png" alt="Kp=6 graph">
+            <blockquote>Trial run 4. Kp=6</blockquote>
+            <a href="https://youtube.com/shorts/nshoTFgx5Is" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/nshoTFgx5Is/0.jpg" alt="Trial 5">
+            </a>
+            <img src="assets/lab6/kp7.png" alt="Kp=7 graph">
+            <blockquote>Trial run 5. Kp=7</blockquote>
+            <a href="https://youtube.com/shorts/mLE2kY2lPKg" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg" alt="Trial 6">
+            </a>
+            <img src="assets/lab6/kp8.png" alt="Kp=8 graph">
+            <blockquote>Trial run 6 Kp=8</blockquote>
+            <p>I had concluded that a Kp of 10 would have been my best estimate, but you will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point as shown below:</p>
+            <a href="https://youtube.com/shorts/Oab9UVZsDJ4" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg" alt="Trial 7">
+            </a>
+            <img src="assets/lab6/kp102.png" alt="Kp=10 Take 2 graph">
+            <blockquote>Trial run 7, Take 2. Kp=10</blockquote>
+            <a href="https://youtube.com/shorts/U_CNB69brVA" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/U_CNB69brVA/0.jpg" alt="Trial 8">
+            </a>
+            <img src="assets/lab6/kp103.png" alt="Kp=10 Take 3 graph">
+            <blockquote>Trial run 8, Take 3. Kp=10</blockquote>
+            <p>However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-7-kalman-filter">Lab 7: Kalman Filter</h2>
+            <h3>Objective</h3>
+            <p>Since our RC car moves faster than the rate of sampling for our TOF sensors, the task of this lab was to implement Kalman filters to predict the location of the car and execute the necessary behaviors much faster.</p>
+
+            <h3>Kalman Filter</h3>
+            <p>To first implement our Kalman filter, the first issue was to calculate our drag and momentum. These 2 values were necessary for our calculations.</p>
+            <img src="assets/lab7/dm.png" alt="Drag and Momentum">
+            <p>By running our robot at a constant PWM value and then calculating both the velocity and its distance it is possible to get the needed values. To do this I first plotted these values against time on a graph and then calculated d and m.</p>
+            <img src="assets/lab7/graph.png" alt="Distance vs Velocity Graph">
+            <p>To calculate the drag (d) I first had to find the steady-state speed of our RC car. I did that by picking a part of the velocity array that didn't have extreme outliers and then finding the average speed (about 1230m/s).</p>
+            <img src="assets/lab7/SSspeed.png" alt="Steady state speed">
+            <p>Assuming u=1, our drag was 1/average speed. For mass (m) we have to find the change in time for our 90% rise time and slot that into the equation above. To find the rise time, I first found out what 90% of my average speed entailed and then traced it on the graph.</p>
+            <img src="assets/lab7/90.png" alt="90% speed">
+            <p>I found out that my rise time was about 0.9 seconds. The values for d and m are below:</p>
+            <img src="assets/lab7/dmvalues.png" alt="Actual d and m values">
+            <p>Using these values we can find our A and B matrices using:</p>
+            <img src="assets/lab7/AB.png" alt="A and B matrix calculation">
+            <p>the C matrix was also given to us:</p>
+            <img src="assets/lab7/c.png" alt="C matrix">
+            <p>Once we have obtained our A and B matrices, we can discretize them and instantiate our sigma values for use in the implementation of the Kalman Filter.</p>
+            <img src="assets/lab7/values.png" alt="Sigma values">
+            <p>Below is the code that was provided to run the Kalman Filter:</p>
+            <img src="assets/lab7/KF.png" alt="Kalman Filter Code">
+
+            <h3>Testing the Kalman Filter</h3>
+            <p>The first test went pretty well. The filter followed the distance pretty closely until it was nearing the end with a much more noticeable drift:</p>
+            <img src="assets/lab7/KF1.png" alt="Kalman Filter Test 1">
+            <img src="assets/lab7/kf1val.png" alt="Test 1 Values">
+
+            <hr>
+
+            <p>The second test follows tightly only for a few seconds before the noticeable drift:</p>
+            <img src="assets/lab7/KF2.png" alt="Kalman Filter Test 2">
+            <img src="assets/lab7/kf2vals.png" alt="Test 2 Values">
+
+            <hr>
+
+            <p>I decided to test the case where sigma 3 was a large value (highlighting a major skepticism to our sensor values). This causes a large gap between our actual distance values and the filtered distance:</p>
+            <img src="assets/lab7/KF3.png" alt="Kalman Filter Test 3">
+            <img src="assets/lab7/kf3vals.png" alt="Test 3 Values">
+
+            <hr>
+
+            <p>I decided to decrease sigma 3 for the next two tests and make sigma 1=sigma 2=40. I observed that for a sigma 3 of 10, the filtered data followed tightly with the actual data and could give consensus that they were approximately the same:</p>
+            <img src="assets/lab7/KF4.png" alt="Kalman Filter Test 4">
+            <img src="assets/lab7/kf4vals.png" alt="Test 4 Values">
+
+            <hr>
+
+            <p>By decreasing sigma 3 further by 5, I observed that the filter derived a perfect fit to the actual data which was the best result:</p>
+            <img src="assets/lab7/KF5.png" alt="Kalman Filter Test 5">
+            <img src="assets/lab7/kf5vals.png" alt="Test 5 Values">
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-8-stunts">Lab 8: STUNTS!</h2>
+            <h3>Objective</h3>
+            <p>The goal of this lab was for our RC car to perform a certain action when it approached a set distance from the wall (whether by turning around or by doing a flip)</p>
+
+            <h3>Implementation</h3>
+            <p>I decided to take on Task B: Orientation control, which entailed the car doing a turn upon reaching a set distance from the wall (300mm) and then back to the starting line. the best possible outcome would be for our robot to race to the wall as fast as possible, turn around, and then back to the finishing line as fast as possible. I had also tried my hands on Task A but issues arose and I couldn't replicate my results so I switched tasks.</p>
+            <p>I rewrote my orient function so that I could input values for how I wanted my car to turn. and then used it whenever the set distance was in sight. Below is a snippet of my code on how I implemented this:</p>
+            <img src="assets/lab8/code.png" alt="Stunts Code">
+            <p>I realized however that mostly due to the speed of the car, I would have to multiply my distance at least twice before the turn would actually initiate at the distance I wanted, so for my car to turn around 300mm from the wall, the distance the turn is called should be at least 600mm. I also realized that there would be a calibration needed to be implemented in my orient function because the errors in the turns were mostly within 10-12 degrees</p>
+            <p>Below are my trials with their respective orient angles. The best I achieved was with a set distance of 700mm from the wall and 190 as the orient angle.</p>
+
+            <h3>Trial 1</h3>
+            <a href="https://youtube.com/shorts/a77Oy4ge4rw" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/a77Oy4ge4rw/0.jpg" alt="Stunts Trial 1">
+            </a>
+            <blockquote>180 in orient function. Turn but not fast enough</blockquote>
+
+            <h3>Trial 2</h3>
+            <a href="https://youtube.com/shorts/9eAMIs0gis8" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/9eAMIs0gis8/0.jpg" alt="Stunts Trial 2">
+            </a>
+            <blockquote>Best result. 190 turn in Orient function</blockquote>
+
+            <h3>Trial 3</h3>
+            <a href="https://youtube.com/shorts/32RKWtN5HGk" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/32RKWtN5HGk/0.jpg" alt="Stunts Trial 3">
+            </a>
+            <blockquote>200-degree turn, Overestimate</blockquote>
+
+            <h3>Trial 4</h3>
+            <a href="https://youtube.com/shorts/P-y4RLXxBJM" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/P-y4RLXxBJM/0.jpg" alt="Stunts Trial 4">
+            </a>
+            <blockquote>195-degree turn slightly overestimated, leading to continuous turns when within distance</blockquote>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-9-mapping">Lab 9: Mapping</h2>
+            <h3>Objective</h3>
+            <p>The objective of this lab is to map out a schematic room using the two TOF sensors on the RC car. We generate a map of the room by taking 360 distance measurements from 5 marked locations</p>
+
+            <h3>Orientation PID control</h3>
+            <p>Below is the code I called to turn and take distance readings at a certain interval. I reused my previous orientation PID control code to incorporate 20-degree turns and instated in a loop the distance readings at each stop in the turns. I ran into multiple issues with the timings of these readings and the applications of my motors but I was able to get concurrent readings with the right intervals.</p>
+            <img src="assets/lab9/code.png" alt="Mapping Code">
+
+            <h3>Plotting readings</h3>
+            <p>Below are polar plots of the distances read with the two sensors on the RC car. This was not necessarily tested in the same environment as the actual map used for the rest of the lab</p>
+            <img src="assets/lab9/tof1.png" alt="TOF 1 Plot">
+            <img src="assets/lab9/tof2.png" alt="TOF 2 Plot">
+            <p>Theoretically, these two plots should be similar but probably inverse of each other, however, the actual readings from the back sensor and those from the front sensor were too different to be cross-referenced.</p>
+            <p>I applied a formula to 4 sets of data sets collected from the sensors to perform the coordinate transformation from the cylindrical coordinate system in the robot frame to the Cartesian coordinate system in the global frame. Finally, by adding the offset based on the robot's position in the global frame, the required data arrays were obtained. Results from different observing points were plotted on the scatter plots below:</p>
+            <img src="assets/lab9/data1.png" alt="Data 1 Plot">
+            <img src="assets/lab9/data2.png" alt="Data 2 Plot">
+            <img src="assets/lab9/data3.png" alt="Data 3 Plot">
+            <img src="assets/lab9/data4.png" alt="Data 4 Plot">
+            <p>Then I meshed all these data points together into the full map below.</p>
+            <img src="assets/lab9/mashup.png" alt="Mashup Map">
+
+            <h3>Line-based map</h3>
+            <p>The map was estimated manually, as shown in the figure below. I did this by viewing the lab tiles as actual points and estimating where the obstacles would be placed. As you can see my data veers off greatly from the actual map. This is most likely due to a calculation issue that appeared when I was calculating my points</p>
+            <img src="assets/lab9/line_map.png" alt="Line-based Map">
+            <p>The room to be mapped is shown in the figure below. In this map, each square represents a single grid cell, and the highlighted square in red represents (0, 0). The green ones indicate the locations where the robot collected data from, with coordinates at (0,3), (5,3), (5,-3), and (-3,-2), respectively.</p>
+            <img src="assets/lab9/actual_map.jpg" alt="Actual Map">
+            <p>The data points I collected were definitely limited. Obtaining more data would likely result in a more accurate map. One approach could be to reduce the interval between set points for my PID orientation control. For example, stopping and storing data every 10 degrees of rotation (36 readings, instead of 18) would increase the density of data points on the map, and would provide a better estimation of the walls. However, this would require further fine-tuning of the PID control (with much more difficulty due to a bug with my motors) to ensure accurate 10-degree turns each time within a full 360-degree cycle.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-10-localization-sim">Lab 10: Localization (sim)</h2>
+            <h3>Objective</h3>
+            <p>This lab's objective is to implement and simulate a grid localization process with Bayes filter applications. A simulator was provided to mimic the behavior of the robot.</p>
+            
+            <h3>Prelab</h3>
+            <p>Localization is the process of determining where the specific entity (in this case, the RC car) is located with respect to its surroundings.</p>
+            <p>A Bayes Filter is a method used by robots to figure out where they are in an environment. It combines what the robot expects to happen (prediction based on control inputs) when it moves with what it actually sees around it (observational data).</p>
+            <p>For example: Imagine you're in a room blindfolded and trying to figure out where you are based on how you think you've moved and what you can feel around you. First, you predict where you might be based on how you've moved while considering that sometimes your movements don't go exactly as planned. Then, you correct this prediction by checking your surroundings, rotating to get a better sense of where things are, and using that information to refine your estimate. In the end, you have a bunch of guesses about where you could be and how likely each one is, and these guesses get updated every time you move. This is similar to what we would implement with the RC car. It moves, considers its movements, rotates around, gathers data, and then uses the refined data to move to a better-estimated position.</p>
+            <p>Below is the rundown application of this in code:</p>
+            <img src="assets/lab10/bayes.png" alt="Bayes Filter Code">
+            <p>For our implementation, we have to divide our map into a 3-dimensionally sized grid of possible robot poses (in the x, y, and theta directions). Our map is of size:</p>
+            <img src="assets/lab10/grid_v.png" alt="Grid View">
+
+            <h3>Implementation</h3>
+            <p>Below is the code we needed to implement for the proper localization in the simulation run of our RC car.</p>
+            <p>The purpose of this function is to compute the transition from one state to another, which involves two rotations and a translation. We utilize the current and previous position readings to calculate these values, employing trigonometry, and then return them.</p>
+            <img src="assets/lab10/code1.png" alt="Transition Code">
+            <p>Next, our goal is to determine the probability that the robot has arrived at a particular current position x', given its previous position x, and the odometry values u. Initially, we calculate the actual control values required to transition from the previous to the current position by utilizing our <code>compute_control</code> function, which takes the current and previous position parameters as inputs. Subsequently, we utilize a Gaussian distribution to estimate the probability of the robot's movement to the current position, based on the anticipated movement derived from the motion commands it was instructed to follow. This Gaussian distribution is centered on the expected motion of the robot as predicted by the odometry model, with a standard deviation determined by our confidence in the accuracy of the odometry model. Essentially, this function computes the probability P(x′∣x,u), which represents the likelihood of the robot reaching a specific current location x′ given its previous location x and the movement commands u.</p>
+            <img src="assets/lab10/code2.png" alt="Probability Code">
+            <p>This next function updates the beliefs and computes the prediction step, by looping through all grids and checking for our probability threshold. If there is a high enough probability, the beliefs are updated.</p>
+            <img src="assets/lab10/code3.png" alt="Update Beliefs Code">
+            <p>In the next step of the Bayes Filter process, we aim to refine our estimated location by incorporating sensor data. To do this, we create a function called <code>sensor_model()</code>. This function helps us determine the likelihood that the robot measures a certain distance based on what it should measure given its current position and angle. The function produces an array of probabilities, with each value corresponding to a specific measurement angle.</p>
+            <img src="assets/lab10/code4.png" alt="Sensor Model Code">
+            <p>Afterward, we proceed to adjust the robot's estimated location probability distribution. We iterate through all conceivable positions, comparing the expected distance measurements from these positions to the actual sensor readings obtained by the robot at its present location. Then, we execute the update by multiplying the probability P(z∣x) (the likelihood of the sensor readings given a specific position) by the predicted belief <code>loc.bel_bar</code> obtained in the prediction step. Finally, we ensure that the belief distribution is normalized, ensuring that all probabilities sum up to 1.</p>
+            <img src="assets/lab10/code5.png" alt="Update Step Code">
+            
+            <h3>Testing and results</h3>
+            <p>By implementing the code, the simulation was completed shown below, with the green path being the ground truth, the blue path being the belief of the robot, and the red path being the odometry measurements.</p>
+            <p>Below are the results of two of the simulation runs as well as a representative video</p>
+            <img src="assets/lab10/simul.png" alt="Simulation 1">
+            <img src="assets/lab10/simul2.png" alt="Simulation 2">
+            <a href="https://youtu.be/oQw4RU8MwMw" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/oQw4RU8MwMw/0.jpg" alt="Simulation Video">
+            </a>
+            <blockquote>Simulation run video</blockquote>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-11-localization-real">Lab 11: Localization (real)</h2>
+            <h3>Objective</h3>
+            <p>This lab focused on implementing localization using the Bayes filter on the real robot.</p>
+            
+            <h3>Localization (sim)</h3>
+            <p>This simulation just reviewed the theoretical run we had done for lab 10 as shown below.</p>
+            <img src="assets/lab11/sim.png" alt="Localization Sim">
+
+            <h3>Localization (real)</h3>
+            <p>Unlike in simulation where both prediction and update steps are typically performed, in this case, only the update step was executed due to the absence of reliable odometry data for the robot's movement.</p>
+            <p>To interact with the real robot and collect sensor readings, a class called <code>RealRobot()</code> was created. This class communicated with the robot via Bluetooth and obtained data from sensors, specifically 18 Time-of-Flight (ToF) sensor readings as the robot completed a 360-degree rotation. These readings were then used in the update step of the Bayes filter.</p>
+            <p>The <code>perform_observation_loop()</code> function within the <code>RealRobot</code> class (shown below) was responsible for orchestrating the robot's rotation and collecting sensor data. Upon receiving commands via Bluetooth, the robot rotated in place while the ToF sensor readings and IMU data were captured. The <code>async</code> and <code>await</code> keywords were used along with the <code>asyncio</code> library to ensure proper synchronization and waiting for the robot to complete its rotation. I decided to just use the MAP command I used previously for lab 9 because it was similar to what I needed to do for this lab.</p>
+            <img src="assets/lab11/code.png" alt="Real Robot Code">
+            <p>After obtaining sensor data, the results were processed and stored in arrays for further use in the localization module.</p>
+
+            <h4>Issues</h4>
+            <p>I ran into a lot of problems when the robot was rotating. My robot seemed to be going too fast, so it overshot the actual angles it was supposed to stop at (and the gyroscope didn't correct these angles) hence it would pass the 360 mark it was supposed to achieve. I struggled with the issue for the longest time, from trying to slow down my motors, which led to multiple recalibrations, and constantly changing my Kp, Ki, and Kd values for my orientation PID in charge of the turns. I finally reached a point where my robot would turn sub-consistently enough to get the actual data properly.</p>
+
+            <h3>Results</h3>
+            <p>Localization tests were conducted by placing the robot at specific poses on the map and running the update step of the Bayes filter. the blue dot is the localization belief.</p>
+            <img src="assets/lab11/1st.png" alt="Localization Test 1">
+            <blockquote>(5,3)</blockquote>
+            <img src="assets/lab11/2nd.png" alt="Localization Test 2">
+            <blockquote>(-3,-2)</blockquote>
+            <img src="assets/lab11/3rd.png" alt="Localization Test 3">
+            <blockquote>(5,-3)</blockquote>
+            <img src="assets/lab11/4th.png" alt="Localization Test 4">
+            <blockquote>(0,3)</blockquote>
+            <p>Most of my results seemed close to the actual position of the point with localization at (5, 3) off by a small margin, but at (-3, -2) by a large margin.</p>
+        </div>
+
+        <div class="lab-card">
+            <h2 id="lab-12-planning-and-execution">Lab 12: Planning and execution</h2>
+            <h3>Objective</h3>
+            <p>The objective of this lab was to attempt to combine all that we have done in the previous labs for a full planning route for our robot</p>
+
+            <h3>Implementations and Results</h3>
+            <p>For my robot, I tried making a function to calculate the distance between a set of points, orient itself, and then move toward that specific point. To do this, I had all the relevant points in an array and then cycled through them in the for loop shown in the code below. I tried making multiple helper functions to aid my robot. From functions that would check if the robot had reached its destination, if there was an an obstacle in the way of the points, etc but all in all my first implementation was quite lacklustre in terms of results.</p>
+            <img src="assets/lab12/move.png" alt="MoveTo Code">
+            <a href="https://youtu.be/rGoe1Frs8f4" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/rGoe1Frs8f4/0.jpg" alt="Planning Test Video">
+            </a>
+            <p>I had also tried hard coding the path of the robot at each point but when testing on the map, my robot would just move forward to the first point, then continuously spin in a circle, thus making me recycle this option</p>
+            <img src="assets/lab12/lab12.png" alt="Hardcoded Path Code">
+            <p>I decided to use a code I had used previously for the showcase and tweak it slightly so that my robot would attempt to hit all the points during its run.</p>
+            <img src="assets/lab12/sc.png" alt="Showcase Code">
+            <p>This actually gave me the best outcome and would race through the points (if it missed one, it would try to go back to it) as it dodged the obstacles. Below is a video of its most successful run.</p>
+            <a href="https://youtu.be/90iDlEB2zSI" class="video-thumbnail">
+                <img src="http://img.youtube.com/vi/90iDlEB2zSI/0.jpg" alt="Final Run Video">
+            </a>
+            <p>As you can see, the robot would try to change direction at each distance from the wall or obstacles and I tried setting the distance so that it would map onto the points pretty closely, but sometimes it would veer off or get stuck unless physically corrected. But using this obstacle avoidance implementation i was able to get through most of the points (albeit with all the unnecessary ones also)</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const toggleButton = document.getElementById('toc-toggle-button');
+        const tocContainer = document.getElementById('toc-container');
+        const mainContainer = document.getElementById('main-container');
+        const header = document.querySelector('header');
+
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        // Initial setup on load
+        if (isMobile()) {
+            tocContainer.classList.add('hidden');
+        }
+
+        toggleButton.addEventListener('click', () => {
+            tocContainer.classList.toggle('hidden');
+            mainContainer.classList.toggle('toc-hidden');
+            if (tocContainer.classList.contains('hidden')) {
+                toggleButton.innerHTML = '&#9776;'; // Hamburger icon
+            } else {
+                toggleButton.innerHTML = '&times;'; // Close icon
+            }
+        });
+
+        // Close the TOC on mobile when a link is clicked
+        tocContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && isMobile()) {
+                tocContainer.classList.add('hidden');
+                mainContainer.classList.remove('toc-hidden');
+                toggleButton.innerHTML = '&#9776;';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
