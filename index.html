@@ -188,46 +188,24 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .video-thumbnail {
-            display: block;
+        /* Responsive video container */
+        .video-container {
+            position: relative;
             width: 100%;
-            max-width: 640px;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             margin: 1.5rem auto;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .video-thumbnail img {
-            display: block;
-            width: 100%;
-            height: auto;
-            margin: 0;
-            border-radius: 0;
-        }
-
-        .video-thumbnail::before {
-            content: '\25BA'; /* Play button icon */
+        .video-container iframe {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 4rem;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.6);
-            border-radius: 50%;
-            width: 5rem;
-            height: 5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .video-thumbnail:hover::before {
-            background: rgba(0, 0, 0, 0.8);
-            transform: translate(-50%, -50%) scale(1.1);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
         }
 
         /* Markdown-style blockquotes for notes */
@@ -274,7 +252,7 @@
             }
 
             .toc-toggle {
-                position: sticky;
+                position: fixed;
                 top: 1rem;
                 left: 1rem;
             }
@@ -318,10 +296,10 @@
 
             <h4>"Example 1: Blink it Up"</h4>
             <p>The “Blink it Up” example was used for this portion of the lab. The code, when compiled would turn the LED on for a specified amount of time, then would turn it off. Below is the result:</p>
-            <a href="https://www.youtube.com/watch?v=sf7wSSynCig" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/sf7wSSynCig/0.jpg" alt="Blink Test Video">
-            </a>
-            <blockquote>Note: Will take you to the video itself</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/sf7wSSynCig" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
 
             <h4>"Example 4: Serial"</h4>
             <p>This example found under Artemis examples, was used to test the serial monitor output. It would print out any messages that were typed in the input space, as seen in the image below.</p>
@@ -330,19 +308,19 @@
 
             <h4>"Example 2: Analog Read"</h4>
             <p>This example was used to test the temperature sensor on the Artemis board. The test would send the temperature reading and time to the serial monitor and would slightly change the temperature number as I applied warm air. ( Change is tiny, about 0.2 from 33.7 to 33.9, likely due to the surrounding room temperature being warmer than usual). Below is the result</p>
-            <a href="https://www.youtube.com/shorts/-SnpcKFRFgw" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/-SnpcKFRFgw/0.jpg" alt="Temperature Test Video">
-            </a>
-            <blockquote>Note: Will take you to the video itself</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/-SnpcKFRFgw" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
 
             <h4>"PDM/Example 1: Microphone Output"</h4>
             <p>The microphone output example was used to show the frequencies picked up by the Artemis board. There would be a slight change as I released a higher-pitched whistle in time and would decrease as I stopped. Below is an image and video of this:</p>
             <img src="assets/lab1/ex_1micout.png" alt="Mic Test">
             <blockquote>Mic test Image</blockquote>
-            <a href="https://www.youtube.com/shorts/9HuIhQY1Gsg" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/9HuIhQY1Gsg/0.jpg" alt="Mic Test Video">
-            </a>
-            <blockquote>Note: Will take you to the video itself</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/9HuIhQY1Gsg" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
 
             <h3>Part 2: Bluetooth Setup</h3>
             <p>The objective of this part of the lab was to establish a Bluetooth connection between the Artemis board and the computer and to indicate its functionality. In this section, we worked in tandem with both Arduino and Python (using Jupiter lab) to connect the Artemis through Bluetooth, then send data to the board over Bluetooth as well</p>
@@ -408,10 +386,11 @@
             <p>First, we hook up the IMU to the board and install the SparkFun 9DOF IMU Breakout - ICM 20948 library onto the Arduino IDE in order to use it with the Artemis.</p>
             <img src="assets/lab2/imu.png" width="250" height="250" alt="IMU Board">
             <p>Next up is running The Example1_BAsics code under the ICM 20948 library to test that our IMU is functioning properly. This is done by rotating the IMU around and checking if the values printed in the Serial Monitor on the Arduino IDE are changing, as shown below:</p>
-            <a href="https://www.youtube.com/watch?v=XSVtera0Tec" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/XSVtera0Tec/0.jpg" alt="IMU Test Video">
-            </a>
-            <blockquote>Note: The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/XSVtera0Tec" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
+            <blockquote>The constant, AD0_VAL, is used to change the last digit of the address for the IMU. There was a data underflow error if the value for AD0_VAL wasn't changed to 0 in my case.</blockquote>
             <img src="assets/lab2/ad_val.png" alt="AD0_VAL change">
 
             <h3>Accelerometer</h3>
@@ -441,9 +420,9 @@
             <p>I decided to decrease the number of iterations of my loops to increase data acquisition performance and also implemented a slight delay by making sure the data was only gathered when the ICM was ready during each iteration. This would produce a delay of about 0.05s before sending the data over Bluetooth.</p>
 
             <h3>Stunt</h3>
-            <a href="https://www.youtube.com/shorts/SvHxav7Waao" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/SvHxav7Waao/0.jpg" alt="Stunt Video">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/SvHxav7Waao" allowfullscreen></iframe>
+            </div>
         </div>
 
         <div class="lab-card">
@@ -502,10 +481,10 @@
             <img src="assets/lab4/osc_read.jpg" width="350" height="200" alt="Oscilloscope Reading">
             <blockquote>Waveform of PWM signal</blockquote>
             <p>Below is a video of the selected pin motors rotating.</p>
-            <a href="https://youtube.com/shorts/v5g4AhH0_x4" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/v5g4AhH0_x4/0.jpg" alt="Motor Test Video">
-            </a>
-            <blockquote>Note: Will take you to the video itself</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/v5g4AhH0_x4" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
 
             <h3>Final Product</h3>
             <p>Once I had ensured that both motor drivers worked correctly, minimized the wiring exposure to mitigate the problem of the wires snagging on the wheels when they rotated. The top image shows the motors soldered to their respective wiring. The bottom image shows</p>
@@ -518,10 +497,10 @@
             <p>The lowest value my <code>analogWrite</code> function would take for the wheels to generate motion was around 40 - 50. 60 seems to be the threshold for which the wheels would rotate at a quick pace and sync up after a small delay</p>
             <p>So to account for this slight delay, I decided to start the wheels that had a delay first, then start the second set of wheels after about 2 seconds (which seemed to be the average delay between the two)</p>
             <p>Below is a video showing the RC car moving in a straight line for about 10-11 tiles. Each tile represents about 1-foot-by-1-foot, so we can assume that the RC car traveled a distance of at least 10 feet before going off-axis.</p>
-            <a href="https://youtube.com/shorts/EIBG5ZQepQ0" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/EIBG5ZQepQ0/0.jpg" alt="RC Car Straight Line Run">
-            </a>
-            <blockquote>Note: Will take you to the video itself</blockquote>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/EIBG5ZQepQ0" allowfullscreen></iframe>
+            </div>
+            <blockquote>Note: The video plays directly in the website.</blockquote>
             <p>There still need to be further tweaks if I want the RC car to continuously run in a straight line.</p>
         </div>
 
@@ -556,17 +535,17 @@
 
             <h4>P controller</h4>
             <p>For my tests, I decided to first start with finding the appropriate Kp value. This would mean to only change Kp and keep Ki and Kd constant at 0. I tested multiple values from 0.1 to 0.3 and below is a video of a run when Kp=0.3 and its associated graph, as well as graphs of Kp=0.15, 0.1, 0.11, and 0.12. All these trials were tested within 1110-1200mm from the wall( or pillow in the video case)</p>
-            <a href="https://youtube.com/shorts/em1e_gkeJNE" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/em1e_gkeJNE/0.jpg" alt="PID Trial 1">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/em1e_gkeJNE" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 1. Kp=0.3</blockquote>
             <img src="assets/lab5/trial1.png" alt="Kp=0.3 graph">
 
             <hr>
 
-            <a href="https://youtube.com/shorts/6Mn24eUHIJc" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/6Mn24eUHIJc/0.jpg" alt="PID Trial 2">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/6Mn24eUHIJc" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 2. Kp=0.15</blockquote>
             <img src="assets/lab5/trial_2.png" alt="Kp=0.15 graph">
 
@@ -581,9 +560,9 @@
 
             <hr>
 
-            <a href="https://youtube.com/shorts/7DNZ9yC7FX4" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/7DNZ9yC7FX4/0.jpg" alt="Best Kp Trial">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/7DNZ9yC7FX4" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 3. Kp=0.12</blockquote>
             <img src="assets/lab5/best_Kp.png" alt="Best Kp graph">
             <blockquote>Note: Car stops at about 295-315 mm (fluctuates with each run)</blockquote>
@@ -592,25 +571,25 @@
 
             <h4>PI controller</h4>
             <p>Since my car was very close to stopping at a good distance relative to the target I decided to incorporate the integral part of the PID to sort out the minor miscalculations. Below are the test runs and graphs for some of these Ki values:</p>
-            <a href="https://youtube.com/shorts/DqiHZIKDnOU" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/DqiHZIKDnOU/0.jpg" alt="PI Trial 4">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/DqiHZIKDnOU" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 4. Ki=0.0.0004</blockquote>
             <img src="assets/lab5/trial_2ki.png" alt="Ki=0.0004 graph">
 
             <hr>
-            <a href="https://youtube.com/shorts/qJ9iUuuDL8w" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/qJ9iUuuDL8w/0.jpg" alt="PI Trial 5">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/qJ9iUuuDL8w" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 5. Ki=0.0003</blockquote>
             <img src="assets/lab5/2nd_best.png" alt="Ki=0.0003 graph">
             <blockquote>Note: Car stops at 294mm</blockquote>
 
             <hr>
 
-            <a href="https://youtube.com/shorts/q6aYRcWZisU" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/q6aYRcWZisU/0.jpg" alt="PI Trial 6">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/q6aYRcWZisU" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 6. Ki=-0.0002</blockquote>
             <img src="assets/lab5/best.png" alt="Ki=0.0002 graph">
             <blockquote>Note: Car stops around 304-307mm)</blockquote>
@@ -635,47 +614,47 @@
             
             <h3>P controller</h3>
             <p>To implement the controller, I decided to only change the Kpo variable and leave the others at zero. I first tested with multiples of 5 and then would center around a margin if one of the Kp values was closer to the desired results. Below are my trials for different KP values For the trial with a KP value of 5, small changes in orientation would make the robot try to compete against them, but with a slight overshoot over time. I also observed that when done from a different direction, the controller in a sense"shuts off" and didn't do anything about the orientation change.</p>
-            <a href="https://youtube.com/shorts/FhUqBIZqNwc" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/FhUqBIZqNwc/0.jpg" alt="Trial 1">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/FhUqBIZqNwc" allowfullscreen></iframe>
+            </div>
             <blockquote>Trial run 1. Kp=5</blockquote>
             <p>Once I reached Kp=10 as a value, I observed that my controller had followed the desired angles at a decent rate.</p>
-            <a href="https://youtube.com/shorts/ysdbTV0sTpQ" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/ysdbTV0sTpQ/0.jpg" alt="Trial 2">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/ysdbTV0sTpQ" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp10.png" alt="Kp=10 graph">
             <blockquote>Trial run 2. Kp=10</blockquote>
             <p>I decided to test at a Kp value of 20 to see if my controller would improve or deviate from the desired results. It indeed deviated by a large margin.</p>
-            <a href="https://youtube.com/shorts/zehcrj7XeiY" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/zehcrj7XeiY/0.jpg" alt="Trial 3">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/zehcrj7XeiY" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp20.png" alt="Kp=20 graph">
             <blockquote>Trial run 3. Kp=20</blockquote>
             <p>I decided to get back to the values between 5 and 10 since I had achieved decent results around them. These are the trials of Kp = 6. Kp=7 and Kp=8.</p>
-            <a href="https://youtube.com/shorts/lvhvP0U0Vkc" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/lvhvP0U0Vkc/0.jpg" alt="Trial 4">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/lvhvP0U0Vkc" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp6.png" alt="Kp=6 graph">
             <blockquote>Trial run 4. Kp=6</blockquote>
-            <a href="https://youtube.com/shorts/nshoTFgx5Is" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/nshoTFgx5Is/0.jpg" alt="Trial 5">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/nshoTFgx5Is" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp7.png" alt="Kp=7 graph">
             <blockquote>Trial run 5. Kp=7</blockquote>
-            <a href="https://youtube.com/shorts/mLE2kY2lPKg" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/mLE2kY2lPKg/0.jpg" alt="Trial 6">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/mLE2kY2lPKg" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp8.png" alt="Kp=8 graph">
             <blockquote>Trial run 6 Kp=8</blockquote>
             <p>I had concluded that a Kp of 10 would have been my best estimate, but you will see however that on random runs with kp=10, there were times when the controller deviated heavily from the desired point as shown below:</p>
-            <a href="https://youtube.com/shorts/Oab9UVZsDJ4" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/Oab9UVZsDJ4/0.jpg" alt="Trial 7">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/Oab9UVZsDJ4" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp102.png" alt="Kp=10 Take 2 graph">
             <blockquote>Trial run 7, Take 2. Kp=10</blockquote>
-            <a href="https://youtube.com/shorts/U_CNB69brVA" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/U_CNB69brVA/0.jpg" alt="Trial 8">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/U_CNB69brVA" allowfullscreen></iframe>
+            </div>
             <img src="assets/lab6/kp103.png" alt="Kp=10 Take 3 graph">
             <blockquote>Trial run 8, Take 3. Kp=10</blockquote>
             <p>However, these random runs seem to be a rare occurrence to each other, because when I tried to replicate them again, I found no such issues. I believe they were however derived from less transfer of power to the battery or the next needed calibration of the motors in the clockwise/anticlockwise direction. Hence using my value of Kp=10, I had a decent controller without having to worry about too much drift, for a large number of angles.</p>
@@ -749,27 +728,27 @@
             <p>Below are my trials with their respective orient angles. The best I achieved was with a set distance of 700mm from the wall and 190 as the orient angle.</p>
 
             <h3>Trial 1</h3>
-            <a href="https://youtube.com/shorts/a77Oy4ge4rw" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/a77Oy4ge4rw/0.jpg" alt="Stunts Trial 1">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/a77Oy4ge4rw" allowfullscreen></iframe>
+            </div>
             <blockquote>180 in orient function. Turn but not fast enough</blockquote>
 
             <h3>Trial 2</h3>
-            <a href="https://youtube.com/shorts/9eAMIs0gis8" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/9eAMIs0gis8/0.jpg" alt="Stunts Trial 2">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/9eAMIs0gis8" allowfullscreen></iframe>
+            </div>
             <blockquote>Best result. 190 turn in Orient function</blockquote>
 
             <h3>Trial 3</h3>
-            <a href="https://youtube.com/shorts/32RKWtN5HGk" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/32RKWtN5HGk/0.jpg" alt="Stunts Trial 3">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/32RKWtN5HGk" allowfullscreen></iframe>
+            </div>
             <blockquote>200-degree turn, Overestimate</blockquote>
 
             <h3>Trial 4</h3>
-            <a href="https://youtube.com/shorts/P-y4RLXxBJM" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/P-y4RLXxBJM/0.jpg" alt="Stunts Trial 4">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/P-y4RLXxBJM" allowfullscreen></iframe>
+            </div>
             <blockquote>195-degree turn slightly overestimated, leading to continuous turns when within distance</blockquote>
         </div>
 
@@ -835,9 +814,9 @@
             <p>Below are the results of two of the simulation runs as well as a representative video</p>
             <img src="assets/lab10/simul.png" alt="Simulation 1">
             <img src="assets/lab10/simul2.png" alt="Simulation 2">
-            <a href="https://youtu.be/oQw4RU8MwMw" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/oQw4RU8MwMw/0.jpg" alt="Simulation Video">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/oQw4RU8MwMw" allowfullscreen></iframe>
+            </div>
             <blockquote>Simulation run video</blockquote>
         </div>
 
@@ -881,17 +860,17 @@
             <h3>Implementations and Results</h3>
             <p>For my robot, I tried making a function to calculate the distance between a set of points, orient itself, and then move toward that specific point. To do this, I had all the relevant points in an array and then cycled through them in the for loop shown in the code below. I tried making multiple helper functions to aid my robot. From functions that would check if the robot had reached its destination, if there was an an obstacle in the way of the points, etc but all in all my first implementation was quite lacklustre in terms of results.</p>
             <img src="assets/lab12/move.png" alt="MoveTo Code">
-            <a href="https://youtu.be/rGoe1Frs8f4" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/rGoe1Frs8f4/0.jpg" alt="Planning Test Video">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/rGoe1Frs8f4" allowfullscreen></iframe>
+            </div>
             <p>I had also tried hard coding the path of the robot at each point but when testing on the map, my robot would just move forward to the first point, then continuously spin in a circle, thus making me recycle this option</p>
             <img src="assets/lab12/lab12.png" alt="Hardcoded Path Code">
             <p>I decided to use a code I had used previously for the showcase and tweak it slightly so that my robot would attempt to hit all the points during its run.</p>
             <img src="assets/lab12/sc.png" alt="Showcase Code">
             <p>This actually gave me the best outcome and would race through the points (if it missed one, it would try to go back to it) as it dodged the obstacles. Below is a video of its most successful run.</p>
-            <a href="https://youtu.be/90iDlEB2zSI" class="video-thumbnail">
-                <img src="http://img.youtube.com/vi/90iDlEB2zSI/0.jpg" alt="Final Run Video">
-            </a>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/90iDlEB2zSI" allowfullscreen></iframe>
+            </div>
             <p>As you can see, the robot would try to change direction at each distance from the wall or obstacles and I tried setting the distance so that it would map onto the points pretty closely, but sometimes it would veer off or get stuck unless physically corrected. But using this obstacle avoidance implementation i was able to get through most of the points (albeit with all the unnecessary ones also)</p>
         </div>
     </div>
